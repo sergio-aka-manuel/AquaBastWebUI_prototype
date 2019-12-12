@@ -67,7 +67,7 @@ export default {
 
         window.console.log('MQTT Client Id: ' + client_id);
 
-        require('./mqttws31.min.js').default;
+        // require('./mqttws31.min.js').default;
         this.mqtt = new window.Paho.MQTT.Client(
             'test-cloud.bast.ru',
             3883,
