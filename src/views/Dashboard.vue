@@ -1,26 +1,24 @@
 
 <template>
     <span>
-        <v-system-bar color="primary" app>
-            <v-spacer></v-spacer>
-            <v-icon>mdi-wifi-strength-4</v-icon>
-            <v-icon>mdi-signal-cellular-outline</v-icon>
-            <v-icon>mdi-battery</v-icon>
-            <span>12:30</span>
-        </v-system-bar>
-
-        <v-app-bar extended app>
+        <v-app-bar app>
             <!-- <v-icon ></v-icon> -->
             <v-btn @click.stop="$router.push('/')" icon>
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
 
-            <v-toolbar-title>AquaBast</v-toolbar-title>
+            <v-toolbar-title>Title</v-toolbar-title>
+
+            <!-- <v-list-item three-line>
+                <v-list-item-content>
+                    <v-list-item-title>Речная 113, кв.91</v-list-item-title>
+                    <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>-->
 
             <v-spacer></v-spacer>
 
             <v-icon>mdi-cloud-sync</v-icon>
-            <v-icon>mdi-battery-charging</v-icon>
 
             <v-btn icon>
                 <v-icon>mdi-help-circle</v-icon>
@@ -39,6 +37,12 @@
             </div>
             <div class="indicator absolute-container">
                 <indicator></indicator>
+                <div class="water-counter hot-water">
+                    <div id="HotWaterCounter">1</div>
+                </div>
+                <div class="water-counter cold-water">
+                    <div id="ColdWaterCounter">2</div>
+                </div>
             </div>
             <div class="footer absolute-container">
                 <v-bottom-navigation :value="activeBtn" grow absolute>
@@ -78,6 +82,39 @@
       height: 20vmin;
   }
 
+  .water-counter {
+      position: absolute;
+      /*background: green;*/
+
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+
+      width: fit-content;
+      line-height: normal;
+
+      font-size: 7vmin;
+
+      border-radius: 8px;
+      border: 2px solid white;
+      background: black;
+  }
+
+  .hot-water {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -130%);
+      background: blueviolet;
+  }
+
+  .cold-water {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, 35%);
+      background: blueviolet;
+  }
+
   /* Portrait */
   @media screen and (orientation: portrait) {
       .infobox {
@@ -97,10 +134,10 @@
       }
 
       .footer {
-          top: 80%;
+          top: 90%;
           left: 0%;
           width: 100%;
-          height: 20%;
+          height: 10%;
           /* background: blue; */
       }
 
@@ -201,6 +238,30 @@
 import Indicator from '@/components/DashboardIndicator.vue';
 
 export default {
+    mounted() {
+        var od = new window.Odometer({
+            el: document.getElementById('HotWaterCounter'),
+            value: 0.05,
+
+            // Any option (other than auto and selector) can be passed in here
+            format: '(ddd),dd',
+            //formatFunction: _counterFormat,
+            theme: 'car'
+        });
+        od.update(0.05);
+
+        od = new window.Odometer({
+            el: document.getElementById('ColdWaterCounter'),
+            value: 123.45,
+
+            // Any option (other than auto and selector) can be passed in here
+            format: '(ddd),dd',
+            //formatFunction: _counterFormat,
+            theme: 'car'
+        });
+        od.update(123.45);
+    },
+
     components: {
         Indicator
     },

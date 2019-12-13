@@ -14,7 +14,10 @@ export default new Vuex.Store({
       phone: '79185387721',
       mail: 'sergio.rudenko@gmail.com',
     },
-    device: {}
+    device: {
+      hotWaterCounterEnabled: true,
+      coldWaterCounterEnabled: true
+    }
   },
   mutations: {
     increment(state) {
