@@ -49,6 +49,7 @@
                 id="DropM3"
                 stroke-width="0"
                 fill="white"
+                :opacity="(this.$store.state.device.hotWaterCounterEnabled | this.$store.state.device.coldWaterCounterEnabled) ? 1 : 0"
                 transform="matrix(2.48, 0, 0, 2.48, -246, -246)"
             >
                 <path
