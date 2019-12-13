@@ -1,7 +1,6 @@
 <template>
     <v-app>
-        <app-navigation></app-navigation>
-
+        <app-navigation v-if="appNavigationEnabled"></app-navigation>
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
@@ -17,14 +16,18 @@ const axios = require('axios').default;
 export default {
     name: 'App',
 
-    beforeCreate() {},
+    beforeCreate() {
+        let _last = 0;
+        let _now = Math.floor(Date.now() / 1000);
 
-    created: function() {
-        // window.console.log('on created: hello!');
+        if (localStorage.lastCodeUpdate) {
+            _last = localStorage.getItem('lastCodeUpdate');
+        }
 
-        this.$store.state.dark = true;
-
-        this.$vuetify.theme.dark = this.$store.state.dark;
+        if (_now - _last > 60) {
+            localStorage.setItem('lastCodeUpdate');
+            window.location.reload();
+        }
     },
 
     mounted() {
@@ -100,6 +103,21 @@ export default {
         onResponce(responce) {
             this.info = responce;
             window.console.log(responce);
+        }
+    },
+
+    computed: {
+        appNavigationEnabled() {
+            let _result = this.$route.path != '/dashboard';
+            return _result;
+        },
+
+        bottomHemicircleColor() {
+            return this.AquaBastBlueColor;
+        },
+        strokeColorThemed() {
+            let color = this.$vuetify.theme.dark ? 'lightgray' : 'gray';
+            return color;
         }
     },
 

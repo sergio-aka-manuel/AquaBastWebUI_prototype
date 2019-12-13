@@ -4,21 +4,22 @@
             <path
                 id="Circle"
                 fill="lightgray"
+                fill-opacity="0.2"
                 stroke-width="4px"
-                :stroke="AquaBastGrayColor"
+                :stroke="strokeColorThemed"
                 d="M 250 498 C 386.966 498 498 386.966 498 250 C 498 113.034 386.966 2 250 2 C 113.034 2 2 113.034 2 250 C 2 386.966 113.034 498 250 498 Z M 250 259.354 L 450.068 259.354 C 468.18 261.236 475.548 269.472 473.045 283.997 C 460.287 391.212 365.292 474.501 250 474.501 C 137.571 474.501 44.446 395.299 28.061 291.94 C 24.535 271.538 32.942 259.995 58.275 259.354 L 250 259.354 Z M 250 244.512 L 450.068 244.512 C 468.18 242.597 475.548 234.207 473.045 219.425 C 460.287 110.283 365.292 25.499 250 25.499 C 137.571 25.499 44.446 106.126 28.061 211.339 C 24.535 232.107 32.942 243.861 58.275 244.512 L 250 244.512 Z"
             />
             <path
                 id="TopHemiCircle"
                 stroke-width="4px"
-                :stroke="AquaBastGrayColor"
+                :stroke="strokeColorThemed"
                 :fill="topHemicircleColor"
                 d="M 249.598 244.505 L 449.658 244.505 C 467.766 242.587 475.136 234.2 472.627 219.416 C 459.878 110.278 364.89 25.497 249.598 25.497 C 137.168 25.497 44.041 106.117 27.659 211.327 C 24.133 232.092 32.542 243.849 57.873 244.505 L 249.598 244.505 Z"
             />
             <path
                 id="BottomHemiCircle"
                 stroke-width="4px"
-                :stroke="AquaBastGrayColor"
+                :stroke="strokeColorThemed"
                 :fill="bottomHemicircleColor"
                 d="M 249.591 259.354 L 449.661 259.354 C 467.773 261.236 475.139 269.475 472.634 283.997 C 459.88 391.212 364.885 474.501 249.591 474.501 C 137.162 474.501 44.037 395.299 27.651 291.94 C 24.128 271.538 32.534 259.995 57.868 259.354 L 249.591 259.354 Z"
             />
@@ -73,12 +74,21 @@
 
 <script>
 export default {
+    beforeMount() {
+        this.displayLogo = false;
+    },
+
     computed: {
         topHemicircleColor() {
             return this.AquaBastRedColor;
         },
+
         bottomHemicircleColor() {
             return this.AquaBastBlueColor;
+        },
+        strokeColorThemed() {
+            let color = this.$vuetify.theme.dark ? 'lightgray' : 'gray';
+            return color;
         }
     },
 

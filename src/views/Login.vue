@@ -30,7 +30,7 @@
                 <v-card-text>
                     <v-container>
                         <v-row>
-                            <v-col cols="12" v-show="signIn">
+                            <!-- <v-col cols="12" v-show="signIn">
                                 <v-text-field
                                     prepend-icon="mdi-account"
                                     hint="Иванов Порфирий Сидорович"
@@ -38,10 +38,10 @@
                                     v-model.number="name"
                                     required
                                 ></v-text-field>
-                            </v-col>
+                            </v-col>-->
                             <v-col cols="12">
                                 <v-text-field
-                                    prepend-icon="mdi-cellphone-iphone"
+                                    prepend-icon="mdi-phone-classic mdi-spin"
                                     hint="+7 (XXX) XXX-XXXX"
                                     label="Телефон*"
                                     v-model="phone"
@@ -50,7 +50,7 @@
                             </v-col>
                             <v-col cols="12" v-show="signIn">
                                 <v-text-field
-                                    prepend-icon="mdi-email"
+                                    prepend-icon="mdi-email mdi-spin"
                                     label="Электронная почта"
                                     hint="Для восстановления доступа"
                                     v-model.number="mail"
@@ -58,7 +58,7 @@
                             </v-col>
                         </v-row>
                     </v-container>
-                    <small>*обязательные поля для заполнения</small>
+                    <small>*поля, обязательные к заполнению</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>

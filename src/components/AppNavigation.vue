@@ -110,6 +110,11 @@ export default {
                     title: 'Панель управления',
                     icon: 'mdi-view-dashboard',
                     path: 'dashboard'
+                },
+                {
+                    title: 'Настройки',
+                    icon: 'mdi-settings',
+                    path: 'settings'
                 }
             ]
         };

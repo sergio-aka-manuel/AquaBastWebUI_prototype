@@ -13,7 +13,8 @@ export default new Vuex.Store({
       username: 'Sergio',
       phone: '79185387721',
       mail: 'sergio.rudenko@gmail.com',
-    }
+    },
+    device: {}
   },
   mutations: {
     increment(state) {
