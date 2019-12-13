@@ -1,7 +1,18 @@
 <template>
     <v-row justify="center">
         <span>
-            <p>Code: {{ code }}</p>
+            <v-layout justify-center>
+                <h2>Confirmation</h2>
+            </v-layout>
+            <v-layout justify-center>
+                <img
+                    alt="Under construction..."
+                    src="../assets/animated-gifs-under-construction.gif"
+                />
+            </v-layout>
+            <v-layout justify-center>
+                <p>Code: {{ code }}</p>
+            </v-layout>
         </span>
         <v-dialog v-model="show" persistent max-width="300px" width="75%">
             <!-- <template v-slot:activator="{ on }">

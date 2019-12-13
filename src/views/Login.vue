@@ -1,9 +1,19 @@
 <template>
     <v-row justify="center">
         <span>
-            <p>Phone: {{ phone }}</p>
-            <p>User: {{ name }}</p>
-            <p>Mail: {{ mail }}</p>
+            <v-layout justify-center>
+                <div>
+                    <h2>Login page</h2>
+                    <img
+                        alt="Under construction..."
+                        src="../assets/animated-gifs-under-construction.gif"
+                    />
+                    <p>Under construction</p>
+                    <p>Phone: {{ phone }}</p>
+                    <p>User: {{ name }}</p>
+                    <p>Mail: {{ mail }}</p>
+                </div>
+            </v-layout>
         </span>
         <v-dialog v-model="show" persistent max-width="600px" width="90%">
             <!-- <template v-slot:activator="{ on }">

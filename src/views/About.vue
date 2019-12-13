@@ -1,7 +1,17 @@
 <template>
-    <h2>About page</h2>
+    <span>
+        <v-layout justify-center>
+            <h2>About page</h2>
+        </v-layout>
+        <v-layout justify-center>
+            <img alt="Under construction..." src="../assets/animated-gifs-under-construction.gif" />
+        </v-layout>
+    </span>
 </template>
 
+
+<style scoped>
+</style>
 
 <script>
 export default {
