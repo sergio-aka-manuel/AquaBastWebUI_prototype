@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About";
 import Login from '../views/Login.vue'
+import Devices from '../views/Devices.vue'
+import Graphs from '../views/Graphs.vue'
+import Logs from '../views/Logs.vue'
+
 import LoginConfirmation from '../views/LoginConfirmation.vue'
 import Dashboard from '../views/Dashboard.vue'
 
@@ -33,7 +37,24 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
-  }
+  },
+
+  {
+    path: '/graphs',
+    name: 'graphs',
+    component: Graphs,
+  },
+  {
+    path: '/logs',
+    name: 'logs',
+    component: Logs,
+  },
+  {
+    path: '/devices',
+    name: 'devices',
+    component: Devices,
+  },
+
   // {
   //   path: "/about",
   //   name: "about",

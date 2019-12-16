@@ -41,7 +41,7 @@
                             </v-col>-->
                             <v-col cols="12">
                                 <v-text-field
-                                    prepend-icon="mdi-phone-classic mdi-spin"
+                                    prepend-icon="mdi-phone-classic "
                                     hint="+7 (XXX) XXX-XXXX"
                                     label="Телефон*"
                                     v-model="phone"
@@ -50,7 +50,7 @@
                             </v-col>
                             <v-col cols="12" v-show="signIn">
                                 <v-text-field
-                                    prepend-icon="mdi-email mdi-spin"
+                                    prepend-icon="mdi-email "
                                     label="Электронная почта"
                                     hint="Для восстановления доступа"
                                     v-model.number="mail"
@@ -94,8 +94,24 @@ export default {
         },
 
         buttonIcon() {
-            if (this.signIn) return 'mdi-login';
-            else return 'mdi-account-plus';
+            var icon;
+            var dt = new Date();
+
+            if (this.signIn) {
+                icon = 'mdi-login';
+            } else {
+                icon = 'mdi-account-plus';
+            }
+
+            if (
+                dt.getMonth() == 3 /* April */ &&
+                dt.getDate() == 1 /* Fool`s Day */
+            ) {
+                window.console.log('Happy Fool`s Day!');
+                icon += ' mdi-spin';
+            }
+
+            return icon;
         }
     },
 

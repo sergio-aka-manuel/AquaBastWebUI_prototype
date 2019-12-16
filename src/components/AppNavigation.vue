@@ -73,13 +73,7 @@
             <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon>
-                <v-icon>mdi-export-variant</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-delete</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-plus</v-icon>
+                <v-icon>mdi-help-circle</v-icon>
             </v-btn>
         </v-app-bar>
     </span>
@@ -107,17 +101,17 @@ export default {
             darkMode: false,
             drawer: false,
             items: [
-                { heading: 'Меню' },
-                { title: 'Vue home', icon: 'mdi-forklift', path: '/' },
-                {
-                    title: 'О программе',
-                    icon: 'mdi-message-text-outline',
-                    path: 'about'
-                },
+                // { heading: 'Меню' },
                 {
                     title: 'Вход в систему',
                     icon: 'mdi-login-variant',
                     path: 'login'
+                },
+                { divider: true },
+                {
+                    title: 'Список устройств',
+                    icon: 'mdi-view-list',
+                    path: '/'
                 },
                 { divider: true },
                 {
@@ -129,6 +123,11 @@ export default {
                     title: 'Настройки',
                     icon: 'mdi-settings',
                     path: 'settings'
+                },
+                {
+                    title: 'О программе',
+                    icon: 'mdi-message-text-outline',
+                    path: 'about'
                 }
             ]
         };

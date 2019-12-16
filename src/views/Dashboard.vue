@@ -1,30 +1,6 @@
 
 <template>
     <span>
-        <v-app-bar app>
-            <!-- <v-icon ></v-icon> -->
-            <v-btn @click.stop="$router.push('/')" icon>
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
-
-            <v-toolbar-title>Title</v-toolbar-title>
-
-            <!-- <v-list-item three-line>
-                <v-list-item-content>
-                    <v-list-item-title>Речная 113, кв.91</v-list-item-title>
-                    <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>-->
-
-            <v-spacer></v-spacer>
-
-            <v-icon>mdi-cloud-sync</v-icon>
-
-            <v-btn icon>
-                <v-icon>mdi-help-circle</v-icon>
-            </v-btn>
-        </v-app-bar>
-
         <div class="dashboard">
             <div class="infobox absolute-container">
                 <v-layout justify-center>header</v-layout>
@@ -239,27 +215,26 @@ import Indicator from '@/components/DashboardIndicator.vue';
 
 export default {
     mounted() {
-        var od = new window.Odometer({
-            el: document.getElementById('HotWaterCounter'),
-            value: 0.05,
+        window.console.log(this.$vuetify.application.top);
 
-            // Any option (other than auto and selector) can be passed in here
-            format: '(ddd),dd',
-            //formatFunction: _counterFormat,
-            theme: 'car'
-        });
-        od.update(0.05);
-
-        od = new window.Odometer({
-            el: document.getElementById('ColdWaterCounter'),
-            value: 123.45,
-
-            // Any option (other than auto and selector) can be passed in here
-            format: '(ddd),dd',
-            //formatFunction: _counterFormat,
-            theme: 'car'
-        });
-        od.update(123.45);
+        // var od = new window.Odometer({
+        //     el: document.getElementById('HotWaterCounter'),
+        //     value: 0.05,
+        //     // Any option (other than auto and selector) can be passed in here
+        //     format: '(ddd),dd',
+        //     //formatFunction: _counterFormat,
+        //     theme: 'car'
+        // });
+        // od.update(0.05);
+        // od = new window.Odometer({
+        //     el: document.getElementById('ColdWaterCounter'),
+        //     value: 123.45,
+        //     // Any option (other than auto and selector) can be passed in here
+        //     format: '(ddd),dd',
+        //     //formatFunction: _counterFormat,
+        //     theme: 'car'
+        // });
+        // od.update(123.45);
     },
 
     components: {
@@ -269,21 +244,22 @@ export default {
     data() {
         return {
             dialog: false,
+            activeBtn: -1,
             items: [
                 {
                     title: 'Графики',
                     icon: 'mdi-chart-areaspline',
-                    path: 'deviceGraph'
+                    path: 'graphs'
                 },
                 {
                     title: 'Журнал',
                     icon: 'mdi-calendar-multiple-check',
-                    path: 'deviceLog'
+                    path: 'logs'
                 },
                 {
-                    title: 'Настройки',
-                    icon: 'mdi-settings',
-                    path: 'deviceSettings'
+                    title: 'Устройства',
+                    icon: 'mdi-speedometer',
+                    path: 'devices'
                 }
             ]
         };
