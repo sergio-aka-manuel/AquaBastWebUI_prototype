@@ -25,12 +25,15 @@ export default {
         }
 
         if (_now - _last > 60) {
-            localStorage.setItem('lastCodeUpdate');
+            localStorage.setItem('lastCodeUpdate', _now);
             window.location.reload();
         }
     },
 
     mounted() {
+        // dark mode
+        this.$vuetify.theme.dark = localStorage.getItem('darkTheme');
+
         window.console.log('on beforeCreate: ');
         window.console.log('hostname: ' + window.location.hostname);
         window.console.log('pathname: ' + window.location.pathname);

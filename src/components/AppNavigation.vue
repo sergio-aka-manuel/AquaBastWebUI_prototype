@@ -53,7 +53,7 @@
                 <v-list dense rounded></v-list>
                 <div class="pa-2">
                     <v-switch
-                        v-model="$vuetify.theme.dark"
+                        v-model="darkMode"
                         prepend-icon="mdi-weather-night"
                         label="Ночной режим"
                         hide-details
@@ -88,9 +88,23 @@
 <script>
 export default {
     name: 'AppNavigation',
+
+    mounted() {
+        this.darkMode = localStorage.getItem('darkMode') == 'true';
+        this.$vuetify.theme.dark = this.darkMode;
+    },
+
+    watch: {
+        darkMode(value) {
+            localStorage.setItem('darkMode', value);
+            this.$vuetify.theme.dark = value;
+        }
+    },
+
     data() {
         return {
             appTitle: 'AquaBast',
+            darkMode: false,
             drawer: false,
             items: [
                 { heading: 'Меню' },

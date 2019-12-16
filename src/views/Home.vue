@@ -6,6 +6,13 @@
         <v-layout justify-center>
             <img alt="Under construction..." src="../assets/animated-gifs-under-construction.gif" />
         </v-layout>
+
+        <v-layout justify-center>
+            <p>lastCodeUpdate: {{_lastCodeUpdate}}</p>
+        </v-layout>
+        <v-layout justify-center>
+            <p>dark mode: {{_darkMode}}</p>
+        </v-layout>
     </span>
 </template>
 
@@ -15,6 +22,16 @@
 
 export default {
     name: 'home',
-    components: {}
+    components: {},
+
+    computed: {
+        _lastCodeUpdate() {
+            return localStorage.getItem('lastCodeUpdate');
+        },
+
+        _darkMode() {
+            return localStorage.getItem('darkMode');
+        }
+    }
 };
 </script>
