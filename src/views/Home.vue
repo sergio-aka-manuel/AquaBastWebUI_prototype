@@ -1,82 +1,32 @@
 <template>
-    <!-- <span> -->
-    <!-- <v-layout justify-center>
-            <h2>Home page</h2>
-        </v-layout>
-        <v-layout justify-center>
-            <img alt="Under construction..." src="../assets/animated-gifs-under-construction.gif" />
-        </v-layout>
-
-        <v-layout justify-center>
-            <p>lastCodeUpdate: {{_lastCodeUpdate}}</p>
-        </v-layout>
-        <v-layout justify-center>
-            <p>dark mode: {{_darkMode}}</p>
-    </v-layout>-->
-
-    <!-- <v-divider></v-divider> -->
-
-    <!-- <v-layout justify-center>
-            <v-card>
-                <v-row>
-                    <v-col cols="3">
-                        <v-row>
-                            <v-layout justify-center>
-                                <v-icon>mdi-arrow-left</v-icon>
-                            </v-layout>
-                        </v-row>
-                        <v-row>
-                            <v-layout justify-space-around justify-space-between>
-                                <v-col cols="1">
-                                    <v-layout justify-center>
-                                        <v-icon>mdi-signal-variant</v-icon>
-                                    </v-layout>
-                                </v-col>
-                                <v-col cols="1">
-                                    <v-layout justify-center>
-                                        <v-icon>mdi-battery-70</v-icon>
-                                    </v-layout>
-                                </v-col>
-                            </v-layout>
-                        </v-row>
-                    </v-col>
-
-                    <v-col cols="8">
-                        <v-row>
-                            <v-layout>Речная 113, кв. 91 (кухня)</v-layout>
-                        </v-row>
-                    </v-col>
-
-                    <v-col cols="1">
-                        <v-container fill-height>
-                            <v-layout align-center justify-center>
-                                <v-icon>mdi-menu-right</v-icon>
-                            </v-layout>
-                        </v-container>
-                    </v-col>
-                </v-row>
-            </v-card>
-    </v-layout>-->
-    <!-- </span> -->
     <span>
-        <template v-for="(device, i) in devices">
+        <template v-for="(device, i) in _devicesList">
             <v-card @click.stop="toDashboard(device.uid)" :key="i">
                 <v-card-text>
                     <v-row align="center">
                         <v-col>
                             <v-row justify="center" align="start">
-                                <v-icon color="error">{{ device.icon }} mdi-48px</v-icon>
+                                <!-- <v-icon color="normal">{{ getDeviceIcon(device.type) }} mdi-48px</v-icon> -->
+                                <div style="width: 48px">
+                                    <aqua-bast-icon v-bind:error="device.state.error"></aqua-bast-icon>
+                                </div>
                             </v-row>
                             <v-row justify="center" align="stretch">
-                                <v-icon>{{ getDeviceRadioLevelIcon(device.uid) }} mdi-18px</v-icon>
-                                <v-icon>{{ getDevicePowerLevelIcon(device.uid) }} mdi-18px</v-icon>
+                                <icon-radio-level
+                                    style="padding-top: 1px"
+                                    v-bind:level="device.state.radioLevel"
+                                ></icon-radio-level>
+                                <icon-power-level
+                                    style="padding-bottom: 2px"
+                                    v-bind:level="device.state.powerLevel"
+                                ></icon-power-level>
                             </v-row>
                         </v-col>
                         <v-col cols="10" style="padding: 0px;">
                             <v-list-item three-line>
                                 <v-list-item-content>
-                                    <v-list-item-title class="headline">{{ device.title }}</v-list-item-title>
-                                    <v-list-item-subtitle>{{ device.subtitle }}</v-list-item-subtitle>
+                                    <v-list-item-title>{{ device.name }}</v-list-item-title>
+                                    <v-list-item-subtitle>{{ device.description }}</v-list-item-subtitle>
                                     <!-- <v-list-item-subtitle>Состояние: Норма, протечек нет</v-list-item-subtitle> -->
                                 </v-list-item-content>
                             </v-list-item>
@@ -95,13 +45,34 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import AquaBastIcon from '@/components/AquaBastIcon.vue';
+import IconPowerLevel from '@/components/IconPowerLevel.vue';
+import IconRadioLevel from '@/components/IconRadioLevel.vue';
 
 export default {
     name: 'home',
-    components: {},
+    components: {
+        AquaBastIcon,
+        IconPowerLevel,
+        IconRadioLevel
+    },
 
     methods: {
+        getDeviceIcon(type) {
+            var _icon;
+
+            switch (type) {
+                case '0401':
+                    _icon = 'mdi-all-inclusive';
+                    break;
+
+                default:
+                    _icon = 'mdi-signal-off';
+            }
+
+            return _icon;
+        },
+
         getDeviceRadioLevelIcon: function(uid) {
             return uid ? 'mdi-signal-variant' : 'mdi-signal-off';
         },
@@ -111,18 +82,36 @@ export default {
         },
 
         toDashboard: function(uid) {
-            window.console.log(uid);
-            this.$router.push('dashboard');
+            //window.console.log(uid);
+            this.$router.push('dashboard/' + uid);
         }
     },
 
     computed: {
+        _deviceLogoColor() {
+            return 'red';
+        },
+
         _lastCodeUpdate() {
             return localStorage.getItem('lastCodeUpdate');
         },
 
         _darkMode() {
             return localStorage.getItem('darkMode');
+        },
+
+        _devicesList() {
+            const targetType = '0401';
+
+            return this.$store.state.devices
+                .filter(function(d) {
+                    // filter only target type devices
+                    return d.type == targetType;
+                })
+                .sort(function(a, b) {
+                    // sort devices by status|name
+                    return a.name > b.name ? 1 : -1;
+                });
         }
     },
 

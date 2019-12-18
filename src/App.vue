@@ -1,31 +1,6 @@
 <template>
     <v-app>
         <app-navigation v-if="appNavigationEnabled"></app-navigation>
-
-        <v-app-bar app v-else>
-            <!-- <v-icon ></v-icon> -->
-            <v-btn @click.stop="$router.go(-1)" icon>
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
-
-            <!-- <v-toolbar-title>Речная 113, кв.91</v-toolbar-title> -->
-
-            <v-list-item three-line>
-                <v-list-item-content>
-                    <v-list-item-title>Речная 113, кв.91</v-list-item-title>
-                    <!-- <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle> -->
-                </v-list-item-content>
-            </v-list-item>
-
-            <v-spacer></v-spacer>
-
-            <!-- <v-icon>mdi-cloud-sync</v-icon> -->
-
-            <v-btn icon>
-                <v-icon>mdi-help-circle</v-icon>
-            </v-btn>
-        </v-app-bar>
-
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
@@ -133,12 +108,8 @@ export default {
 
     computed: {
         appNavigationEnabled() {
-            let _result =
-                this.$route.path != '/dashboard' &&
-                this.$route.path != '/devices' &&
-                this.$route.path != '/graphs' &&
-                this.$route.path != '/logs';
-            return _result;
+            // window.console.log(this.$route);
+            return this.$route.name != 'dashboard';
         },
 
         bottomHemicircleColor() {

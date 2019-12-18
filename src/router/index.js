@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About";
 import Login from '../views/Login.vue'
+
 import Devices from '../views/Devices.vue'
 import Graphs from '../views/Graphs.vue'
 import Logs from '../views/Logs.vue'
@@ -14,46 +15,45 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    name: 'home',
+    path: '/',
     component: Home
   },
   {
-    path: "/about",
-    name: "about",
+    name: 'about',
+    path: '/about',
     component: About,
   },
   {
-    path: '/login',
     name: 'login',
+    path: '/login',
     component: Login,
   },
   {
-    path: '/confirm',
     name: 'confirm',
+    path: '/confirm',
     component: LoginConfirmation,
   },
   {
-    path: '/dashboard',
     name: 'dashboard',
+    path: '/dashboard/:uid',
     component: Dashboard,
   },
-
   {
-    path: '/graphs',
-    name: 'graphs',
-    component: Graphs,
-  },
-  {
-    path: '/logs',
     name: 'logs',
+    path: '/logs/:uid',
     component: Logs,
   },
   {
-    path: '/devices',
-    name: 'devices',
-    component: Devices,
+    name: 'graphs',
+    path: '/graphs/:uid',
+    component: Graphs,
   },
+  {
+    name: 'devices',
+    path: '/devices/:uid',
+    component: Devices,
+  }
 
   // {
   //   path: "/about",

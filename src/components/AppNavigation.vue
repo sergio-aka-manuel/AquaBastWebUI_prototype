@@ -1,7 +1,7 @@
 <template>
     <span>
         <v-navigation-drawer v-model="drawer" temporary app>
-            <v-subheader>Пользователь:</v-subheader>
+            <!-- <v-subheader>Пользователь:</v-subheader> -->
             <v-list-item>
                 <v-list-item-avatar>
                     <v-img src="../assets/araragi.jpg"></v-img>
@@ -50,18 +50,19 @@
                 </v-list-item>-->
             </v-list>
             <template v-slot:append>
-                <v-list dense rounded></v-list>
+                <v-list-item>
+                    <div class="pa-2">
+                        <v-switch
+                            v-model="darkMode"
+                            prepend-icon="mdi-weather-night"
+                            label="Ночной режим"
+                            hide-details
+                            dense
+                        ></v-switch>
+                    </div>
+                </v-list-item>
                 <div class="pa-2">
-                    <v-switch
-                        v-model="darkMode"
-                        prepend-icon="mdi-weather-night"
-                        label="Ночной режим"
-                        hide-details
-                        dense
-                    ></v-switch>
-                </div>
-                <div class="pa-2">
-                    <v-btn block>Logout</v-btn>
+                    <v-btn block rounded>Logout</v-btn>
                 </div>
             </template>
         </v-navigation-drawer>
@@ -107,7 +108,6 @@ export default {
                     icon: 'mdi-login-variant',
                     path: 'login'
                 },
-                { divider: true },
                 {
                     title: 'Список устройств',
                     icon: 'mdi-view-list',
@@ -124,6 +124,7 @@ export default {
                     icon: 'mdi-settings',
                     path: 'settings'
                 },
+                { divider: true },
                 {
                     title: 'О программе',
                     icon: 'mdi-message-text-outline',

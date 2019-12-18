@@ -1,6 +1,31 @@
 
 <template>
     <span>
+        <v-app-bar app>
+            <!-- <v-icon ></v-icon> -->
+            <v-btn @click.stop="$router.push('/')" icon>
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+
+            <!-- <v-toolbar-title>Речная 113, кв.91</v-toolbar-title> -->
+
+            <v-list-item three-line>
+                <v-list-item-content>
+                    <v-list-item-title>{{ _device.name }}</v-list-item-title>
+                    <!-- <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle> -->
+                </v-list-item-content>
+            </v-list-item>
+
+            <v-spacer></v-spacer>
+
+            <!-- <v-icon>mdi-cloud-sync</v-icon> -->
+
+            <v-btn icon>
+                <!-- должен быть скатик! -->
+                <v-icon>mdi-help-circle</v-icon>
+            </v-btn>
+        </v-app-bar>
+
         <div class="dashboard">
             <div class="infobox absolute-container">
                 <v-layout justify-center>header</v-layout>
@@ -12,18 +37,18 @@
                 <div class="dashboard-button button-bottom-right">br</div>
             </div>
             <div class="indicator absolute-container">
-                <indicator></indicator>
+                <indicator v-bind:_device="_device"></indicator>
                 <div class="water-counter hot-water">
-                    <div id="HotWaterCounter">1</div>
+                    <div id="HotWaterCounter"></div>
                 </div>
                 <div class="water-counter cold-water">
-                    <div id="ColdWaterCounter">2</div>
+                    <div id="ColdWaterCounter"></div>
                 </div>
             </div>
             <div class="footer absolute-container">
                 <v-bottom-navigation :value="activeBtn" grow absolute>
-                    <template v-for="(item, i) in items">
-                        <v-btn :key="i" :to="item.path">
+                    <template v-for="(item, i) in menuItems">
+                        <v-btn :key="i" :to="getMenuItemPath(item.path)">
                             <span>{{item.title}}</span>
                             <v-icon>{{item.icon}}</v-icon>
                         </v-btn>
@@ -33,6 +58,60 @@
         </div>
     </span>
 </template>
+
+
+<script>
+import Indicator from '@/components/DashboardIndicator.vue';
+
+export default {
+    components: {
+        Indicator
+    },
+
+    methods: {
+        getMenuItemPath(dest) {
+            const path = '/' + dest + '/' + this._device.uid;
+            // window.console.log(dest + ' -> ' + path);
+            return path;
+        }
+    },
+
+    computed: {
+        _device() {
+            const uid = this.$route.params.uid;
+            var dev = this.$store.state.devices.filter(function(d) {
+                return d.uid == uid;
+            });
+
+            // window.console.log(d);
+            return dev[0];
+        }
+    },
+
+    data() {
+        return {
+            activeBtn: -1,
+            menuItems: [
+                {
+                    title: 'Графики',
+                    icon: 'mdi-chart-areaspline',
+                    path: 'graphs'
+                },
+                {
+                    title: 'Журнал',
+                    icon: 'mdi-calendar-multiple-check',
+                    path: 'logs'
+                },
+                {
+                    title: 'Устройства',
+                    icon: 'mdi-speedometer',
+                    path: 'devices'
+                }
+            ]
+        };
+    }
+};
+</script>
 
 <style scoped>
   .relative-container {
@@ -209,60 +288,3 @@
       }
   }
 </style>
-
-<script>
-import Indicator from '@/components/DashboardIndicator.vue';
-
-export default {
-    mounted() {
-        window.console.log(this.$vuetify.application.top);
-
-        // var od = new window.Odometer({
-        //     el: document.getElementById('HotWaterCounter'),
-        //     value: 0.05,
-        //     // Any option (other than auto and selector) can be passed in here
-        //     format: '(ddd),dd',
-        //     //formatFunction: _counterFormat,
-        //     theme: 'car'
-        // });
-        // od.update(0.05);
-        // od = new window.Odometer({
-        //     el: document.getElementById('ColdWaterCounter'),
-        //     value: 123.45,
-        //     // Any option (other than auto and selector) can be passed in here
-        //     format: '(ddd),dd',
-        //     //formatFunction: _counterFormat,
-        //     theme: 'car'
-        // });
-        // od.update(123.45);
-    },
-
-    components: {
-        Indicator
-    },
-
-    data() {
-        return {
-            dialog: false,
-            activeBtn: -1,
-            items: [
-                {
-                    title: 'Графики',
-                    icon: 'mdi-chart-areaspline',
-                    path: 'graphs'
-                },
-                {
-                    title: 'Журнал',
-                    icon: 'mdi-calendar-multiple-check',
-                    path: 'logs'
-                },
-                {
-                    title: 'Устройства',
-                    icon: 'mdi-speedometer',
-                    path: 'devices'
-                }
-            ]
-        };
-    }
-};
-</script>
