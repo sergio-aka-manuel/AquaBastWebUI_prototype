@@ -1,58 +1,39 @@
 <template>
-    <span>
-        <template v-for="(device, i) in _devicesList">
-            <v-card @click.stop="toDashboard(device.uid)" :key="i">
-                <v-card-text>
-                    <v-row align="center">
-                        <v-col>
-                            <v-row justify="center" align="start">
-                                <!-- <v-icon color="normal">{{ getDeviceIcon(device.type) }} mdi-48px</v-icon> -->
-                                <div style="width: 48px">
-                                    <aqua-bast-icon v-bind:error="device.state.error"></aqua-bast-icon>
-                                </div>
-                            </v-row>
-                            <v-row justify="center" align="stretch">
-                                <icon-radio-level
-                                    style="padding-top: 1px"
-                                    v-bind:level="device.state.radioLevel"
-                                ></icon-radio-level>
-                                <icon-power-level
-                                    style="padding-bottom: 2px"
-                                    v-bind:level="device.state.powerLevel"
-                                ></icon-power-level>
-                            </v-row>
-                        </v-col>
-                        <v-col cols="10" style="padding: 0px;">
-                            <v-list-item three-line>
-                                <v-list-item-content>
-                                    <v-list-item-title>{{ device.name }}</v-list-item-title>
-                                    <v-list-item-subtitle>{{ device.description }}</v-list-item-subtitle>
-                                    <!-- <v-list-item-subtitle>Состояние: Норма, протечек нет</v-list-item-subtitle> -->
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-col>
-                        <v-col style="padding: 0px;">
-                            <v-row align="center" justify="center">
-                                <v-icon>mdi-menu-right</v-icon>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-            </v-card>
-        </template>
-    </span>
+    <v-container>
+        <v-card
+            class="mb-2"
+            color="default"
+            v-for="(device, i) in _devicesList"
+            :key="i"
+            @click.stop="toDashboard(device.uid)"
+        >
+            <v-card-title class="text-truncate font-weight-regular">{{ device.name }}</v-card-title>
+            <v-card-subtitle>{{ device.description }}</v-card-subtitle>
+            <v-divider></v-divider>
+            <v-card-actions>
+                <icon-radio-level v-bind:level="device.state.radioLevel"></icon-radio-level>
+                <icon-power-level v-bind:level="device.state.powerLevel"></icon-power-level>
+                <v-spacer></v-spacer>
+                <v-chip color="error" smal outlined>
+                    <v-icon left color="default">mdi-alert-circle</v-icon>Протечка!
+                </v-chip>
+                <v-spacer></v-spacer>
+                <v-icon>mdi-chevron-right</v-icon>
+            </v-card-actions>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
-import AquaBastIcon from '@/components/AquaBastIcon.vue';
+// import AquaBastIcon from '@/components/AquaBastIcon.vue';
 import IconPowerLevel from '@/components/IconPowerLevel.vue';
 import IconRadioLevel from '@/components/IconRadioLevel.vue';
 
 export default {
     name: 'home',
     components: {
-        AquaBastIcon,
+        // AquaBastIcon,
         IconPowerLevel,
         IconRadioLevel
     },
@@ -84,6 +65,10 @@ export default {
         toDashboard: function(uid) {
             //window.console.log(uid);
             this.$router.push('dashboard/' + uid);
+        },
+
+        toSensors: function(uid) {
+            this.$router.push('/devices/' + uid);
         }
     },
 

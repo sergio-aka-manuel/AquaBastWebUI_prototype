@@ -25,7 +25,7 @@
             />
             <path
                 id="BastionLogo"
-                stroke-width="1px"
+                stroke-width="2px"
                 stroke="white"
                 fill="none"
                 :opacity="_device.config.coldWaterCounterEnabled ? 0 : 1"
