@@ -109,7 +109,7 @@ export default {
     computed: {
         appNavigationEnabled() {
             // window.console.log(this.$route);
-            return this.$route.name != 'dashboard';
+            return false;
         },
 
         bottomHemicircleColor() {

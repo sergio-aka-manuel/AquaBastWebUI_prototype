@@ -1,5 +1,5 @@
 <template>
-    <div transition="scale-transition">
+    <div>
         <v-row no-gutters style="width: 100%">
             <v-col cols="2">
                 <v-icon>mdi-chevron-down mdi-48px</v-icon>
@@ -10,7 +10,8 @@
                     <span
                         class="d-inline-block text-truncate font-weight-regular"
                         style="max-width: 85%;"
-                    >{{ name }}</span>
+                        >{{ name }}</span
+                    >
                     <v-spacer></v-spacer>
                     <v-icon>mdi-chevron-down</v-icon>
                 </v-card-title>
@@ -21,8 +22,13 @@
         <v-divider></v-divider>
 
         <v-card-actions>
-            <icon-radio-level v-bind:level="component.state.radioLevel"></icon-radio-level>
-            <icon-power-level v-bind:level="component.state.powerLevel"></icon-power-level>
+            <icon-radio-level
+                v-bind:level="component.state.radioLevel"
+            ></icon-radio-level>
+            <v-divider vertical></v-divider>
+            <icon-power-level
+                v-bind:level="component.state.powerLevel"
+            ></icon-power-level>
 
             <v-spacer></v-spacer>
 
@@ -33,9 +39,7 @@
     </div>
 </template>
 
-
-<style scoped>
-</style>
+<style scoped></style>
 
 <script>
 import IconPowerLevel from '@/components/IconPowerLevel.vue';
@@ -156,3 +160,63 @@ export default {
     }
 };
 </script>
+
+<v-fade-transition v-slot:append>
+                <!-- <v-icon v-if="task" @click="create">add_circle</v-icon> -->
+                <leakage-sensor-card-expanded
+                    :hostUid="$route.params.uid"
+                    :component="component"
+                    v-if="expanded == getKey(component)"
+                ></leakage-sensor-card-expanded>
+            </v-fade-transition>
+
+<v-fade-transition v-slot:append v-if="expanded != getKey(component)">
+                <div>
+                    <v-row no-gutters style="width: 100%">
+                        <v-col cols="2">
+                            <v-icon>mdi-chevron-down mdi-48px</v-icon>
+                        </v-col>
+
+                        <v-col cols="10">
+                            <v-card-title>
+                                <span
+                                    class="d-inline-block text-truncate font-weight-regular"
+                                    style="max-width: 85%;"
+                                    >{{ name }}</span
+                                >
+                                <v-spacer></v-spacer>
+                                <v-icon>mdi-chevron-down</v-icon>
+                            </v-card-title>
+                            <v-card-subtitle>{{ description }}</v-card-subtitle>
+                        </v-col>
+                    </v-row>
+
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                        <icon-radio-level
+                            v-bind:level="component.state.radioLevel"
+                        ></icon-radio-level>
+                        <v-divider vertical></v-divider>
+                        <icon-power-level
+                            v-bind:level="component.state.powerLevel"
+                        ></icon-power-level>
+
+                        <v-spacer></v-spacer>
+
+                        <!-- <v-chip color="green" small outlined>
+                <v-icon left color="default">mdi-information</v-icon>Ok
+            </v-chip>-->
+                    </v-card-actions>
+                </div>
+            </v-fade-transition>
+
+<!-- </v-scale-transition> -->
+<!-- <v-scale-transition> -->
+<!-- <leakage-sensor-card
+                :hostUid="$route.params.uid"
+                :component="component"
+                v-if="expanded != getKey(component)"
+            ></leakage-sensor-card>-->
+<!-- </v-scale-transition> -->
+<!-- </v-expand-transition> -->
