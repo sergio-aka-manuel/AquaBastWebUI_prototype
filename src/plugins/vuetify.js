@@ -4,7 +4,28 @@ import Vuetify from "vuetify/lib";
 Vue.use(Vuetify);
 
 export default new Vuetify({
-    // theme: {
-    //     dark: this.$store.state.dark
-    // }
+    theme: {
+        themes: {
+            light: {
+                primary: '#01488a',
+                secondary: '#565656',
+                accent: '#82B1FF',
+                error: '#DB2B39',
+                info: '#4CAF50',
+                success: '#01488a',
+                warning: '#FFC107',
+            },
+            dark: {
+
+                primary: '#01488a',
+                secondary: '#565656',
+                accent: '#82B1FF',
+                error: '#DB2B39',
+                info: '#4CAF50',
+                success: '#01488a',
+                warning: '#FFC107',
+            },
+
+        },
+    }
 });
