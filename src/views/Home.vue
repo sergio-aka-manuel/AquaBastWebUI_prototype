@@ -14,8 +14,10 @@
                 <icon-radio-level v-bind:level="device.state.radioLevel"></icon-radio-level>
                 <icon-power-level v-bind:level="device.state.powerLevel"></icon-power-level>
                 <v-spacer></v-spacer>
-                <v-chip color="error" smal outlined>
-                    <v-icon left color="default">mdi-alert-circle</v-icon>Протечка!
+                <v-chip color="error" small>
+                    <v-icon left color="default">mdi-alert-circle</v-icon>
+                    <!-- <span style="color: red;">Протечка!</span> -->
+                    Протечка
                 </v-chip>
                 <v-spacer></v-spacer>
                 <v-icon>mdi-chevron-right</v-icon>
