@@ -30,15 +30,15 @@
                 class="mb-2"
                 color="default"
                 :ripple="false"
-                v-for="(component, i) in _components"
+                v-for="(component, i) in components"
                 :key="i"
             >
                 <div>
                     <v-row no-gutters>
                         <v-col cols="2" class="ma-auto">
                             <aqua-bast-icon
-                                name="wifi-3"
-                                color="#EB5757"
+                                name="sensor"
+                                color="secondary"
                             ></aqua-bast-icon>
                         </v-col>
                         <v-col>
@@ -61,6 +61,7 @@
                     <v-card-actions class="py-1">
                         <icon-radio-level
                             v-bind:level="component.state.radioLevel"
+                            size="24px"
                         ></icon-radio-level>
                         <!-- <v-divider vertical></v-divider> -->
                         <icon-power-level
@@ -76,17 +77,6 @@
     </span>
 </template>
 
-<style scoped>
-.component-fade-enter-active,
-.component-fade-leave-active {
-    transition: opacity 0.3s ease;
-}
-.component-fade-enter, .component-fade-leave-to
-                                          /* .component-fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
-}
-</style>
-
 <script>
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
 // expanded != getKey(component) ? expanded = getKey(component) : expanded = ''
@@ -95,7 +85,7 @@
 
 import IconPowerLevel from '@/components/IconPowerLevel.vue';
 import IconRadioLevel from '@/components/IconRadioLevel.vue';
-import AquaBastIcon from '@/components/SvgIcons/AquaBast.vue';
+import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
 
 export default {
     components: {
@@ -126,7 +116,7 @@ export default {
     },
 
     computed: {
-        _components() {
+        components() {
             return this.device.components;
         }
     },
@@ -139,3 +129,5 @@ export default {
     }
 };
 </script>
+
+<style scoped></style>

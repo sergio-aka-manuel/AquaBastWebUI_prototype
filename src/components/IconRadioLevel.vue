@@ -1,47 +1,39 @@
 <template>
-    <v-icon :color="icon.color">{{ icon.symbol }}</v-icon>
+    <aqua-bast-icon
+        :name="value[level].name"
+        :color="value[level].color"
+        :size="size"
+    ></aqua-bast-icon>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
 
 <script>
+import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+
 export default {
-    props: {
-        level: [Number, String]
+    components: {
+        AquaBastIcon
     },
 
-    computed: {
-        icon() {
-            var _icon = {
-                symbol: '',
-                color: 'normal'
-            };
+    props: {
+        level: [Number, String],
+        size: [Number, String]
+    },
 
-            switch (this.level) {
-                case 1:
-                    _icon.symbol += 'mdi-signal-cellular-1';
-                    break;
+    computed: {},
 
-                case 2:
-                    _icon.symbol += 'mdi-signal-cellular-2';
-                    break;
-
-                case 3:
-                    _icon.symbol += 'mdi-signal-cellular-3';
-                    break;
-
-                default:
-                    if (this.level == 0) {
-                        _icon.symbol += 'mdi-signal-cellular-outline';
-                    } else {
-                        _icon.symbol += 'mdi-signal-off';
-                    }
-                    _icon.color = 'error';
-                    break;
-            }
-            return _icon;
-        }
+    data() {
+        return {
+            value: {
+                undefined: { name: 'radio-offline', color: 'error' },
+                0: { name: 'radio-0', color: 'error' },
+                1: { name: 'radio-1', color: 'secondary' },
+                2: { name: 'radio-2', color: 'secondary' },
+                3: { name: 'radio-3', color: 'secondary' }
+            },
+            expanded: ''
+        };
     }
 };
 </script>
