@@ -21,58 +21,176 @@
             <aqua-bast-icon
                 name="INFO"
                 size="48px"
-                color="#01488a"
+                color="primary"
             ></aqua-bast-icon>
+
+            <template v-slot:extension>
+                <v-tabs
+                    v-model="tabs"
+                    fixed-tabs
+                    background-color="transparent"
+                >
+                    <v-tabs-slider color="primary"></v-tabs-slider>
+                    <v-tab href="#sensors" class="primary--text">
+                        <aqua-bast-icon
+                            name="sensor"
+                            size="36px"
+                            color="primary"
+                        ></aqua-bast-icon>
+                    </v-tab>
+
+                    <v-tab href="#valves" class="primary--text">
+                        <aqua-bast-icon
+                            name="valve-error"
+                            size="36px"
+                            color="primary"
+                        ></aqua-bast-icon>
+                    </v-tab>
+
+                    <v-tab href="#all" class="primary--text">
+                        <!-- <aqua-bast-icon
+                            name="EDIT"
+                            size="36px"
+                            color="primary"
+                        ></aqua-bast-icon> -->
+                        <aqua-bast-icon
+                            name="sensor"
+                            size="24px"
+                            color="primary"
+                        ></aqua-bast-icon
+                        >+
+                        <aqua-bast-icon
+                            name="valve-error"
+                            size="24px"
+                            color="primary"
+                        ></aqua-bast-icon>
+                    </v-tab>
+                </v-tabs>
+            </template>
         </v-app-bar>
 
+        <v-tabs-items v-model="tabs">
+            <v-tab-item :value="'sensors'">
+                <device-sensor
+                    v-for="(component, i) in sensors"
+                    :device="component"
+                    :key="i"
+                ></device-sensor>
+            </v-tab-item>
+
+            <v-tab-item> </v-tab-item>
+
+            <v-tab-item :value="'valves'">
+                <device-sensor
+                    v-for="(component, i) in valves"
+                    :device="component"
+                    :key="i"
+                ></device-sensor>
+            </v-tab-item>
+            <v-tab-item> </v-tab-item>
+
+            <v-tab-item :value="'all'">
+                <device-sensor
+                    v-for="(component, i) in components"
+                    :device="component"
+                    :key="i"
+                ></device-sensor>
+            </v-tab-item>
+            <v-tab-item> </v-tab-item>
+        </v-tabs-items>
+
         <v-container>
-            <v-card
+            <!-- <v-card
                 class="mb-2"
                 color="default"
-                :ripple="false"
                 v-for="(component, i) in components"
+                :ripple="false"
                 :key="i"
+                @click="
+                    expanded != getKey(component)
+                        ? (expanded = getKey(component))
+                        : (expanded = '')
+                "
             >
-                <div>
-                    <v-row no-gutters>
-                        <v-col cols="2" class="ma-auto">
-                            <aqua-bast-icon
-                                name="sensor"
-                                color="secondary"
-                            ></aqua-bast-icon>
-                        </v-col>
-                        <v-col>
-                            <v-card-title class="px-1 py-2">
+                <v-row no-gutters>
+                    <v-col cols="2">
+                        <v-row no-gutters>
+                            <v-col class="ma-auto pt-1 px-0">
+                                <aqua-bast-icon-device
+                                    :data="deviceIcons"
+                                    :device="component"
+                                ></aqua-bast-icon-device>
+                            </v-col>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-col cols="6" class="ma-auto py-0 px-2">
+                                <aqua-bast-icon-level
+                                    size="24px"
+                                    :data="radioIcons"
+                                    :level="component.radioLevel"
+                                ></aqua-bast-icon-level>
+                            </v-col>
+                            <v-col cols="6" class="ma-auto py-0 px-0">
+                                <aqua-bast-icon-level
+                                    size="24px"
+                                    :data="powerIcons"
+                                    :level="component.powerLevel"
+                                ></aqua-bast-icon-level>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col>
+                        <v-row no-gutters>
+                            <v-card-title class="px-1 py-1">
                                 <span
                                     class="d-inline-block text-truncate font-weight-regular"
-                                    style="max-width: 85%;"
-                                    >{{ component.name }}</span
-                                >
-                                <v-spacer></v-spacer>
+                                    >{{
+                                        component.name
+                                            ? component.name
+                                            : getComponentName(component)
+                                    }}
+                                </span>
                             </v-card-title>
-                            <v-card-subtitle class="px-1 py-2">{{
+                            <v-spacer></v-spacer>
+                            <v-fade-transition>
+                                <v-icon
+                                    class="px-2 py-0"
+                                    v-show="expanded != getKey(component)"
+                                    >mdi-chevron-down</v-icon
+                                >
+                            </v-fade-transition>
+                        </v-row>
+                        <v-row
+                            no-gutters
+                            v-show="expanded != getKey(component)"
+                        >
+                            <v-card-subtitle class="px-1 py-0">{{
                                 component.description
+                                    ? component.description
+                                    : getComponentDescription(component)
                             }}</v-card-subtitle>
-                        </v-col>
-                    </v-row>
+                        </v-row>
+                    </v-col>
+                </v-row> -->
 
-                    <v-divider></v-divider>
+            <!-- <v-divider></v-divider>
 
                     <v-card-actions class="py-1">
-                        <icon-radio-level
-                            v-bind:level="component.state.radioLevel"
+                        <aqua-bast-icon-level
                             size="24px"
-                        ></icon-radio-level>
-                        <!-- <v-divider vertical></v-divider> -->
-                        <icon-power-level
-                            v-bind:level="component.state.powerLevel"
-                        ></icon-power-level>
-
+                            :data="radioIcons"
+                            :level="component.radioLevel"
+                        ></aqua-bast-icon-level>
+                        <aqua-bast-icon-level
+                            size="24px"
+                            :data="powerIcons"
+                            :level="component.powerLevel"
+                        ></aqua-bast-icon-level>
                         <v-spacer></v-spacer>
                         <v-icon>mdi-chevron-down</v-icon>
-                    </v-card-actions>
-                </div>
-            </v-card>
+                    </v-card-actions> -->
+
+            <!-- </v-card> -->
         </v-container>
     </span>
 </template>
@@ -83,17 +201,18 @@
 // import LeakageSensorCard from '@/components/LeakageSensorCard.vue';
 // import LeakageSensorCardExpanded from '@/components/LeakageSensorCardExpanded.vue';
 
-import IconPowerLevel from '@/components/IconPowerLevel.vue';
-import IconRadioLevel from '@/components/IconRadioLevel.vue';
 import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+import DeviceSensor from '@/components/DeviceSensor.vue';
+import { isUndefined } from 'util';
+// import AquaBastIconLevel from '@/components/SvgIcons/IconLevel.vue';
+// import AquaBastIconDevice from '@/components/SvgIcons/IconDevice.vue';
 
 export default {
     components: {
-        // LeakageSensorCard,
-        // LeakageSensorCardExpanded,
-        IconPowerLevel,
-        IconRadioLevel,
-        AquaBastIcon
+        AquaBastIcon,
+        DeviceSensor
+        // AquaBastIconLevel,
+        // AquaBastIconDevice
     },
 
     mounted() {
@@ -112,18 +231,110 @@ export default {
             return (
                 component.uid + '.' + component.type + '#' + component.number
             );
+        },
+
+        getComponentName(component) {
+            return (
+                this.$store.state.const.deviceDefaults[component.type].name +
+                (1 + component.number)
+            );
+        },
+
+        getComponentDescription(component) {
+            return (
+                this.$store.state.const.deviceDefaults[component.type]
+                    .description + component.host
+            );
         }
     },
 
     computed: {
         components() {
-            return this.device.components;
+            if (
+                !isUndefined(this.device) &&
+                !isUndefined(this.device.components)
+            ) {
+                var items = this.device.components.map(function(item) {
+                    return item;
+                });
+
+                return items.sort((a, b) => {
+                    var result = 0;
+
+                    // Датчики с протечкой вверху списка
+                    if (result == 0) {
+                        if (a.state == 'leakage' && b.state == 'leakage') {
+                            result = 0;
+                        } else if (a.state == 'leakage') {
+                            result = -1;
+                        } else if (b.state == 'leakage') {
+                            result = 1;
+                        } else {
+                            // Отключенные датчики ниже остальных
+                            if (
+                                a.state == 'disabled' &&
+                                b.state == 'disabled'
+                            ) {
+                                result = 0;
+                            } else if (a.state == 'disabled') {
+                                result = 1;
+                            } else if (b.state == 'disabled') {
+                                result = -1;
+                            } else {
+                                // Датчики с авариями выше остальных
+                                if (
+                                    a.state != 'normal' &&
+                                    b.state != 'normal'
+                                ) {
+                                    result = 0;
+                                } else if (a.state != 'normal') {
+                                    result = -1;
+                                } else if (b.state != 'normal') {
+                                    result = 1;
+                                }
+                            }
+                        }
+                    }
+
+                    // При прочих равных: сортировка по времени события
+                    if (result == 0) {
+                        if (a.ts > b.ts) result = -1;
+                        else result = 1;
+                    }
+
+                    return result;
+                });
+            }
+            return null;
+        },
+
+        valves() {
+            return this.components
+                ? this.components.filter(item => {
+                      return item.type == 'valve' || item.type == 'relay';
+                  })
+                : null;
+        },
+
+        sensors() {
+            return this.components
+                ? this.components.filter(item => {
+                      return (
+                          item.type == 'wireless_sensor' ||
+                          item.type == 'wired_sensor'
+                      );
+                  })
+                : null;
         }
     },
 
     data() {
         return {
             device: {},
+            tabs: null,
+            text:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+
             expanded: ''
         };
     }

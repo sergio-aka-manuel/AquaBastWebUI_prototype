@@ -7,12 +7,14 @@
             :key="i"
             @click.stop="toDashboard(device.uid)"
         >
-            <v-card-title class="text-truncate font-weight-regular">{{ device.name }}</v-card-title>
+            <v-card-title class="text-truncate font-weight-regular">{{
+                device.name
+            }}</v-card-title>
             <v-card-subtitle>{{ device.description }}</v-card-subtitle>
             <v-divider></v-divider>
             <v-card-actions>
-                <icon-radio-level v-bind:level="device.state.radioLevel"></icon-radio-level>
-                <icon-power-level v-bind:level="device.state.powerLevel"></icon-power-level>
+                <!-- <icon-radio-level v-bind:level="device.state.radioLevel"></icon-radio-level>
+                <icon-power-level v-bind:level="device.state.powerLevel"></icon-power-level> -->
                 <v-spacer></v-spacer>
                 <v-chip color="error" small>
                     <v-icon left color="default">mdi-alert-circle</v-icon>
@@ -29,15 +31,15 @@
 <script>
 // @ is an alias to /src
 // import AquaBastIcon from '@/components/AquaBastIcon.vue';
-import IconPowerLevel from '@/components/IconPowerLevel.vue';
-import IconRadioLevel from '@/components/IconRadioLevel.vue';
+//import IconPowerLevel from '@/components/IconPowerLevel.vue';
+//import IconRadioLevel from '@/components/IconRadioLevel.vue';
 
 export default {
     name: 'home',
     components: {
         // AquaBastIcon,
-        IconPowerLevel,
-        IconRadioLevel
+        // IconPowerLevel,
+        // IconRadioLevel
     },
 
     methods: {

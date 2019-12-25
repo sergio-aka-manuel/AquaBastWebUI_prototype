@@ -1,4 +1,3 @@
-
 <template>
     <span>
         <v-app-bar app>
@@ -49,8 +48,8 @@
                 <v-bottom-navigation :value="activeBtn" grow absolute>
                     <template v-for="(item, i) in menuItems">
                         <v-btn :key="i" :to="getMenuItemPath(item.path)">
-                            <span>{{item.title}}</span>
-                            <v-icon>{{item.icon}}</v-icon>
+                            <span>{{ item.title }}</span>
+                            <v-icon>{{ item.icon }}</v-icon>
                         </v-btn>
                     </template>
                 </v-bottom-navigation>
@@ -58,7 +57,6 @@
         </div>
     </span>
 </template>
-
 
 <script>
 import Indicator from '@/components/DashboardIndicator.vue';
@@ -93,19 +91,24 @@ export default {
             activeBtn: -1,
             menuItems: [
                 {
-                    title: 'Графики',
+                    // title: 'Устройства',
+                    icon: 'mdi-speedometer',
+                    path: 'devices'
+                },
+                {
+                    // title: 'Графики',
                     icon: 'mdi-chart-areaspline',
                     path: 'graphs'
                 },
                 {
-                    title: 'Журнал',
+                    // title: 'Журнал',
                     icon: 'mdi-calendar-multiple-check',
                     path: 'logs'
                 },
                 {
-                    title: 'Устройства',
-                    icon: 'mdi-speedometer',
-                    path: 'devices'
+                    // title: 'Настройки',
+                    icon: 'mdi-settings',
+                    path: 'logs'
                 }
             ]
         };
@@ -114,177 +117,177 @@ export default {
 </script>
 
 <style scoped>
-  .relative-container {
-      position: relative;
-  }
+.relative-container {
+    position: relative;
+}
 
-  .absolute-container {
-      position: absolute;
-  }
+.absolute-container {
+    position: absolute;
+}
 
-  .dashboard {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      /* background: yellow; */
-  }
+.dashboard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* background: yellow; */
+}
 
-  .dashboard-button {
-      position: absolute;
-      background: transparent;
+.dashboard-button {
+    position: absolute;
+    background: transparent;
 
-      width: 20vmin;
-      height: 20vmin;
-  }
+    width: 20vmin;
+    height: 20vmin;
+}
 
-  .water-counter {
-      position: absolute;
-      /*background: green;*/
+.water-counter {
+    position: absolute;
+    /*background: green;*/
 
-      -webkit-transition: all 0.3s ease;
-      -moz-transition: all 0.3s ease;
-      -o-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 
-      width: fit-content;
-      line-height: normal;
+    width: fit-content;
+    line-height: normal;
 
-      font-size: 7vmin;
+    font-size: 7vmin;
 
-      border-radius: 8px;
-      border: 2px solid white;
-      background: black;
-  }
+    border-radius: 8px;
+    border: 2px solid white;
+    background: black;
+}
 
-  .hot-water {
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -130%);
-      background: blueviolet;
-  }
+.hot-water {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -130%);
+    background: blueviolet;
+}
 
-  .cold-water {
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, 35%);
-      background: blueviolet;
-  }
+.cold-water {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 35%);
+    background: blueviolet;
+}
 
-  /* Portrait */
-  @media screen and (orientation: portrait) {
-      .infobox {
-          top: 0;
-          left: 0%;
-          width: 100%;
-          height: 20%;
-          background: blueviolet;
-      }
+/* Portrait */
+@media screen and (orientation: portrait) {
+    .infobox {
+        top: 0;
+        left: 0%;
+        width: 100%;
+        height: 20%;
+        background: blueviolet;
+    }
 
-      .indicator {
-          top: calc(50% - 35vmin);
-          left: calc(50% - 35vmin);
-          width: 70vmin;
-          height: 70vmin;
-          /* background: green; */
-      }
+    .indicator {
+        top: calc(50% - 35vmin);
+        left: calc(50% - 35vmin);
+        width: 70vmin;
+        height: 70vmin;
+        /* background: green; */
+    }
 
-      .footer {
-          top: 90%;
-          left: 0%;
-          width: 100%;
-          height: 10%;
-          /* background: blue; */
-      }
+    .footer {
+        top: 90%;
+        left: 0%;
+        width: 100%;
+        height: 10%;
+        /* background: blue; */
+    }
 
-      .buttons {
-          top: 20%;
-          left: 0;
-          width: 100%;
-          height: 60%;
-          /* background: red; */
-      }
+    .buttons {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        /* background: red; */
+    }
 
-      .button-top-left {
-          top: calc(15% - 10vmin);
-          left: calc(15% - 10vmin);
-          background: chartreuse;
-      }
+    .button-top-left {
+        top: calc(15% - 10vmin);
+        left: calc(15% - 10vmin);
+        background: chartreuse;
+    }
 
-      .button-top-right {
-          top: calc(15% - 10vmin);
-          left: calc(85% - 10vmin);
-          background: chartreuse;
-      }
+    .button-top-right {
+        top: calc(15% - 10vmin);
+        left: calc(85% - 10vmin);
+        background: chartreuse;
+    }
 
-      .button-bottom-left {
-          top: calc(85% - 10vmin);
-          left: calc(15% - 10vmin);
-          background: chartreuse;
-      }
+    .button-bottom-left {
+        top: calc(85% - 10vmin);
+        left: calc(15% - 10vmin);
+        background: chartreuse;
+    }
 
-      .button-bottom-right {
-          top: calc(85% - 10vmin);
-          left: calc(85% - 10vmin);
-          background: chartreuse;
-      }
-  }
+    .button-bottom-right {
+        top: calc(85% - 10vmin);
+        left: calc(85% - 10vmin);
+        background: chartreuse;
+    }
+}
 
-  /* Landscape */
-  @media screen and (orientation: landscape) {
-      .infobox {
-          top: 0;
-          left: 50%;
-          width: 50%;
-          height: 20%;
-          background: blueviolet;
-      }
+/* Landscape */
+@media screen and (orientation: landscape) {
+    .infobox {
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 20%;
+        background: blueviolet;
+    }
 
-      .indicator {
-          top: calc(50% - 35vmin);
-          left: calc(25% - 35vmin);
-          width: 70vmin;
-          height: 70vmin;
-          /* background: green; */
-      }
+    .indicator {
+        top: calc(50% - 35vmin);
+        left: calc(25% - 35vmin);
+        width: 70vmin;
+        height: 70vmin;
+        /* background: green; */
+    }
 
-      .footer {
-          top: 80%;
-          left: 50%;
-          width: 50%;
-          height: 20%;
-          /* background: blue; */
-      }
+    .footer {
+        top: 80%;
+        left: 50%;
+        width: 50%;
+        height: 20%;
+        /* background: blue; */
+    }
 
-      .buttons {
-          top: 20%;
-          left: 50%;
-          width: 50%;
-          height: 60%;
-          /* background: red; */
-      }
+    .buttons {
+        top: 20%;
+        left: 50%;
+        width: 50%;
+        height: 60%;
+        /* background: red; */
+    }
 
-      .button-top-left {
-          top: calc(25% - 10vmin);
-          left: calc(50% - 30vmin);
-          background: chartreuse;
-      }
+    .button-top-left {
+        top: calc(25% - 10vmin);
+        left: calc(50% - 30vmin);
+        background: chartreuse;
+    }
 
-      .button-top-right {
-          top: calc(25% - 10vmin);
-          left: calc(50% + 10vmin);
-          background: chartreuse;
-      }
+    .button-top-right {
+        top: calc(25% - 10vmin);
+        left: calc(50% + 10vmin);
+        background: chartreuse;
+    }
 
-      .button-bottom-left {
-          top: calc(75% - 10vmin);
-          left: calc(50% - 30vmin);
-          background: chartreuse;
-      }
+    .button-bottom-left {
+        top: calc(75% - 10vmin);
+        left: calc(50% - 30vmin);
+        background: chartreuse;
+    }
 
-      .button-bottom-right {
-          top: calc(75% - 10vmin);
-          left: calc(50% + 10vmin);
-          background: chartreuse;
-      }
-  }
+    .button-bottom-right {
+        top: calc(75% - 10vmin);
+        left: calc(50% + 10vmin);
+        background: chartreuse;
+    }
+}
 </style>
