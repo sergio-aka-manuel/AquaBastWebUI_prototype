@@ -17,11 +17,19 @@
 
             <v-spacer></v-spacer>
 
-            <!-- <v-icon>mdi-cloud-sync</v-icon> -->
+            <aqua-bast-icon
+                name="cloud"
+                size="56px"
+                color="secondary"
+            ></aqua-bast-icon>
 
-            <v-btn icon>
+            <v-btn icon class="ml-2">
                 <!-- должен быть скатик! -->
-                <v-icon>mdi-help-circle</v-icon>
+                <aqua-bast-icon
+                    name="INFO"
+                    size="40px"
+                    color="primary"
+                ></aqua-bast-icon>
             </v-btn>
         </v-app-bar>
 
@@ -44,15 +52,32 @@
                     <div id="ColdWaterCounter"></div>
                 </div>
             </div>
-            <div class="footer absolute-container">
-                <v-bottom-navigation :value="activeBtn" grow absolute>
+            <div class="footer absolute-container ">
+                <div class="d-flex justify-space-around align-stretch">
                     <template v-for="(item, i) in menuItems">
-                        <v-btn :key="i" :to="getMenuItemPath(item.path)">
-                            <span>{{ item.title }}</span>
-                            <v-icon>{{ item.icon }}</v-icon>
+                        <v-btn
+                            class="mt-1"
+                            :to="getMenuItemPath(item.path)"
+                            :key="i"
+                            text
+                        >
+                            <aqua-bast-icon
+                                :name="item.icon"
+                                size="40px"
+                                color="secondary"
+                            ></aqua-bast-icon>
                         </v-btn>
                     </template>
-                </v-bottom-navigation>
+
+                    <!-- <v-btn> </v-btn>
+                    <v-btn text>
+                        <aqua-bast-icon
+                            name="LOGO"
+                            color="secondary"
+                            size="36px"
+                        ></aqua-bast-icon>
+                    </v-btn> -->
+                </div>
             </div>
         </div>
     </span>
@@ -60,10 +85,12 @@
 
 <script>
 import Indicator from '@/components/DashboardIndicator.vue';
+import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
 
 export default {
     components: {
-        Indicator
+        Indicator,
+        AquaBastIcon
     },
 
     methods: {
@@ -91,24 +118,24 @@ export default {
             activeBtn: -1,
             menuItems: [
                 {
-                    // title: 'Устройства',
-                    icon: 'mdi-speedometer',
+                    title: 'Устройства',
+                    icon: 'devices',
                     path: 'devices'
                 },
                 {
-                    // title: 'Графики',
-                    icon: 'mdi-chart-areaspline',
-                    path: 'graphs'
+                    title: 'Графики',
+                    icon: 'charts',
+                    path: 'charts'
                 },
                 {
-                    // title: 'Журнал',
-                    icon: 'mdi-calendar-multiple-check',
-                    path: 'logs'
+                    title: 'Журнал',
+                    icon: 'journal',
+                    path: 'journal'
                 },
                 {
-                    // title: 'Настройки',
-                    icon: 'mdi-settings',
-                    path: 'logs'
+                    title: 'Настройки',
+                    icon: 'settings',
+                    path: 'settings'
                 }
             ]
         };

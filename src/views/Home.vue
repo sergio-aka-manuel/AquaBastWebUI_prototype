@@ -1,9 +1,26 @@
 <template>
-    <v-container>
+    <span>
+        <navigation />
+
+        <v-fab-transition>
+            <v-btn
+                v-show="!hidden"
+                class="mb-12"
+                color="pink"
+                dark
+                absolute
+                bottom
+                right
+                fab
+            >
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-fab-transition>
+
         <v-card
-            class="mb-2"
+            class="ma-2"
             color="default"
-            v-for="(device, i) in _devicesList"
+            v-for="(device, i) in devices"
             :key="i"
             @click.stop="toDashboard(device.uid)"
         >
@@ -25,7 +42,7 @@
                 <v-icon>mdi-chevron-right</v-icon>
             </v-card-actions>
         </v-card>
-    </v-container>
+    </span>
 </template>
 
 <script>
@@ -34,12 +51,15 @@
 //import IconPowerLevel from '@/components/IconPowerLevel.vue';
 //import IconRadioLevel from '@/components/IconRadioLevel.vue';
 
+import Navigation from '@/components/Navigation';
+
 export default {
     name: 'home',
     components: {
         // AquaBastIcon,
         // IconPowerLevel,
         // IconRadioLevel
+        Navigation
     },
 
     methods: {
@@ -89,7 +109,7 @@ export default {
             return localStorage.getItem('darkMode');
         },
 
-        _devicesList() {
+        devices() {
             const targetType = '0401';
 
             return this.$store.state.devices
@@ -105,41 +125,7 @@ export default {
     },
 
     data() {
-        return {
-            devices: [
-                {
-                    icon: 'mdi-close-network',
-                    title: 'Речная 113, кв.91',
-                    subtitle:
-                        'Описание объекта установки системы и еще много-много буков',
-                    uid: '111111111'
-                },
-                {
-                    title: 'Другой объект',
-                    icon: 'mdi-close-network',
-                    subtitle: '/',
-                    uid: '222222'
-                },
-                {
-                    title: 'Другой объект',
-                    icon: 'mdi-close-network',
-                    subtitle: '/',
-                    uid: '333'
-                },
-                {
-                    title: 'Другой объект',
-                    icon: 'mdi-close-network',
-                    subtitle: '/',
-                    uid: '444'
-                },
-                {
-                    title: 'Другой объект',
-                    icon: 'mdi-close-network',
-                    subtitle: '/',
-                    uid: '555'
-                }
-            ]
-        };
+        return {};
     }
 };
 </script>

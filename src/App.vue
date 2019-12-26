@@ -1,6 +1,5 @@
 <template>
     <v-app>
-        <app-navigation v-if="appNavigationEnabled"></app-navigation>
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
@@ -8,7 +7,6 @@
 </template>
 
 <script>
-import AppNavigation from '@/components/AppNavigation';
 // import store from './store';
 
 const axios = require('axios').default;
@@ -121,9 +119,7 @@ export default {
         }
     },
 
-    components: {
-        AppNavigation
-    },
+    components: {},
 
     // data: () => ({ mqtt: {} })
     data() {
