@@ -14,45 +14,44 @@ export default new Vuex.Store({
       AquaBastBlueColor: 'rgb(1, 72, 138)', //#01488A
       AquaBastGrayColor: 'rgb(86, 86, 86)', //#565656
 
-
       wifiLevelIcons: {
-        undefined: { name: 'wifi-offline', color: 'error' },
-        0: { name: 'wifi-1', color: 'error' },
-        1: { name: 'wifi-1', color: 'secondary' },
-        2: { name: 'wifi-2', color: 'secondary' },
-        3: { name: 'wifi-3', color: 'secondary' }
+        undefined: { name: 'wifi-offline', color: 'error', text: 'ошибка...' },
+        0: { name: 'wifi-1', color: 'error', text: 'очень слабый' },
+        1: { name: 'wifi-1', color: 'secondary', text: 'слабый' },
+        2: { name: 'wifi-2', color: 'secondary', text: 'нормальный' },
+        3: { name: 'wifi-3', color: 'secondary', text: 'сильный' }
       },
 
-      radioLevelIcons: {
-        undefined: { name: 'radio-offline', color: 'error' },
-        0: { name: 'radio-0', color: 'error' },
-        1: { name: 'radio-1', color: 'secondary' },
-        2: { name: 'radio-2', color: 'secondary' },
-        3: { name: 'radio-3', color: 'secondary' }
+      radioLevels: {
+        undefined: { name: 'radio-offline', color: 'error', text: 'ошибка...' },
+        0: { name: 'radio-0', color: 'error', text: 'очень слабый' },
+        1: { name: 'radio-1', color: 'secondary', text: 'слабый' },
+        2: { name: 'radio-2', color: 'secondary', text: 'нормальный' },
+        3: { name: 'radio-3', color: 'secondary', text: 'сильный' }
       },
 
-      powerLevelIcons: {
-        undefined: { name: 'battery-offline', color: 'error' },
-        0: { name: 'battery-empty', color: 'error' },
-        1: { name: 'battery-10', color: 'secondary' },
-        2: { name: 'battery-50', color: 'secondary' },
-        3: { name: 'battery-75', color: 'secondary' },
-        4: { name: 'battery-full', color: 'secondary' },
-        5: { name: 'battery-charging', color: 'secondary' }
+      powerLevels: {
+        undefined: { name: 'battery-offline', color: 'error', text: 'ошибка...' },
+        0: { name: 'battery-empty', color: 'error', text: 'менее 5%' },
+        1: { name: 'battery-10', color: 'secondary', text: '10%' },
+        2: { name: 'battery-50', color: 'secondary', text: '50%' },
+        3: { name: 'battery-75', color: 'secondary', text: '75%' },
+        4: { name: 'battery-full', color: 'secondary', text: '100%' },
+        5: { name: 'battery-charging', color: 'secondary', text: 'заряжается' }
       },
 
-      deviceIcons: {
+      deviceStates: {
         // Проводной датчик
-        wired_sensor_normal: { name: 'sensor', color: 'primary' },
-        wired_sensor_error: { name: 'sensor-offline', color: 'error' },
-        wired_sensor_leakage: { name: 'sensor-leakage', color: 'error' },
-        wired_sensor_disabled: { name: 'sensor-offline', color: 'secondary' },
+        wired_sensor_normal: { color: 'primary', name: 'sensor', text: 'норма' },
+        wired_sensor_error: { name: 'sensor-offline', color: 'error', text: 'авария' },
+        wired_sensor_leakage: { name: 'sensor-leakage', color: 'error', text: 'протечка' },
+        wired_sensor_disabled: { name: 'sensor-offline', color: 'secondary', text: 'отключен' },
 
         // Радио датчик
-        wireless_sensor_normal: { name: 'sensor', color: 'primary' },
-        wireless_sensor_error: { name: 'sensor-offline', color: 'error' },
-        wireless_sensor_leakage: { name: 'sensor-leakage', color: 'error' },
-        wireless_sensor_disabled: { name: 'sensor-offline', color: 'secondary' }
+        wireless_sensor_normal: { name: 'sensor', color: 'primary', text: 'норма' },
+        wireless_sensor_error: { name: 'sensor-offline', color: 'error', text: 'авария' },
+        wireless_sensor_leakage: { name: 'sensor-leakage', color: 'error', text: 'протечка' },
+        wireless_sensor_disabled: { name: 'sensor-offline', color: 'secondary', text: 'отключен' }
 
         // Кран
         // valve: {
@@ -66,9 +65,31 @@ export default new Vuex.Store({
       deviceDefaults: {
         wired_sensor: { name: "Датчик №", description: 'Подключен к AquaBast ' },
         wireless_sensor: { name: "Радио датчик №", description: 'Сопряжен с AquaBast ' },
+      },
+
+      deviceSortOreder: {
+        // Протечка
+        wired_sensor_leakage: 0,
+        wireless_sensor_leakage: 0,
+
+        // Отказ датчика|привода
+        wired_sensor_error: 1,
+        wireless_sensor_error: 1,
+        valve_error: 1,
+
+        // Нормальное состояние, сначала датчики
+        wired_sensor_normal: 2,
+        wireless_sensor_normal: 2,
+        valve_opened: 3,
+        valve_closed: 3,
+        relay: 4,
+
+        // Отключенное состояние, сначала датчики
+        wired_sensor_disabled: 5,
+        wireless_sensor_disabled: 5,
+        valve_disabled: 6,
+        relay_disabled: 7,
       }
-
-
 
     },
 

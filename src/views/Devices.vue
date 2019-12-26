@@ -259,50 +259,22 @@ export default {
                 });
 
                 return items.sort((a, b) => {
-                    var result = 0;
+                    // Сортировка по типу устройства и состоянию
+                    var _a = this.$store.state.const.deviceSortOreder[
+                        a.type + '_' + a.state
+                    ];
+                    var _b = this.$store.state.const.deviceSortOreder[
+                        b.type + '_' + b.state
+                    ];
 
-                    // Датчики с протечкой вверху списка
-                    if (result == 0) {
-                        if (a.state == 'leakage' && b.state == 'leakage') {
-                            result = 0;
-                        } else if (a.state == 'leakage') {
-                            result = -1;
-                        } else if (b.state == 'leakage') {
-                            result = 1;
-                        } else {
-                            // Отключенные датчики ниже остальных
-                            if (
-                                a.state == 'disabled' &&
-                                b.state == 'disabled'
-                            ) {
-                                result = 0;
-                            } else if (a.state == 'disabled') {
-                                result = 1;
-                            } else if (b.state == 'disabled') {
-                                result = -1;
-                            } else {
-                                // Датчики с авариями выше остальных
-                                if (
-                                    a.state != 'normal' &&
-                                    b.state != 'normal'
-                                ) {
-                                    result = 0;
-                                } else if (a.state != 'normal') {
-                                    result = -1;
-                                } else if (b.state != 'normal') {
-                                    result = 1;
-                                }
-                            }
-                        }
+                    if (_a < _b) return -1;
+                    else if (_a > _b) return 1;
+                    else {
+                        // При прочих равных: по времени (позже - выше)
+                        if (a.ts > b.ts) return -1;
+                        else if (a.ts < b.ts) return 1;
                     }
-
-                    // При прочих равных: сортировка по времени события
-                    if (result == 0) {
-                        if (a.ts > b.ts) result = -1;
-                        else result = 1;
-                    }
-
-                    return result;
+                    return 0;
                 });
             }
             return null;
