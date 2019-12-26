@@ -12,27 +12,32 @@ export default {
     },
 
     props: {
-        device: [Object],
-        data: [Object],
+        index: [String],
         size: [String, Number]
     },
 
     computed: {
-        index() {
-            return this.device.type + '_' + this.device.state;
-        },
+        // index() {
+        //     return this.device.type + '_' + this.device.state;
+        // },
 
         name() {
-            if (isUndefined(this.data) || isUndefined(this.data[this.index])) {
+            if (isUndefined(this.list[this.index])) {
                 return 'INFO';
-            } else return this.data[this.index].name;
+            } else return this.list[this.index].name;
         },
 
         color() {
-            if (isUndefined(this.data) || isUndefined(this.data[this.index])) {
+            if (isUndefined(this.list[this.index])) {
                 return 'error';
-            } else return this.data[this.index].color;
+            } else return this.list[this.index].color;
         }
+    },
+
+    data() {
+        return {
+            list: this.$store.state.const.deviceStates
+        };
     }
 };
 </script>

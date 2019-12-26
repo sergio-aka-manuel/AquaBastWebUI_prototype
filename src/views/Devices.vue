@@ -48,11 +48,6 @@
                     </v-tab>
 
                     <v-tab href="#all" class="primary--text">
-                        <!-- <aqua-bast-icon
-                            name="EDIT"
-                            size="36px"
-                            color="primary"
-                        ></aqua-bast-icon> -->
                         <aqua-bast-icon
                             name="sensor"
                             size="24px"
