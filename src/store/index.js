@@ -14,7 +14,7 @@ export default new Vuex.Store({
       AquaBastBlueColor: 'rgb(1, 72, 138)', //#01488A
       AquaBastGrayColor: 'rgb(86, 86, 86)', //#565656
 
-      wifiLevelIcons: {
+      wifiLevels: {
         undefined: { name: 'wifi-offline', color: 'error', text: 'ошибка...' },
         0: { name: 'wifi-1', color: 'error', text: 'очень слабый' },
         1: { name: 'wifi-1', color: 'secondary', text: 'слабый' },
@@ -41,6 +41,10 @@ export default new Vuex.Store({
       },
 
       deviceStates: {
+        // AquaBast C-PRO
+        "0401_closed": { color: 'secondary', name: 'EMPTY', text: 'Проток воды закрыт' },
+        "0401_opened": { color: 'secondary', name: 'EMPTY', text: 'Проток воды открыт' },
+
         // Проводной датчик
         wired_sensor_normal: { color: 'primary', name: 'sensor', text: 'норма' },
         wired_sensor_error: { name: 'sensor-offline', color: 'error', text: 'авария' },
@@ -112,6 +116,7 @@ export default new Vuex.Store({
         description: 'Описание объекта установки системы и еще много-много буков',
         powerLevel: 3,
         radioLevel: 2,
+        state: "opened",
         components: [
           {
             type: 'wired_sensor',
@@ -161,10 +166,9 @@ export default new Vuex.Store({
           hotWaterCounterEnabled: false,
           coldWaterCounterEnabled: false
         },
-        state: {
-          powerLevel: 3,
-          radioLevel: 2,
-        },
+        powerLevel: 3,
+        radioLevel: 2,
+        state: "closed",
         components: [
           {
             type: 'wired_sensor',

@@ -14,6 +14,8 @@ export default new Vuetify({
                 info: '#4CAF50',
                 success: '#01488a',
                 warning: '#FFC107',
+
+                ab_color: '#01488a'
             },
             dark: {
                 primary: '#82B1FF',
@@ -23,6 +25,8 @@ export default new Vuetify({
                 info: '#4CAF50',
                 success: '#01488a',
                 warning: '#FFC107',
+
+                ab_color: '#A6A6A6'
             },
 
         },

@@ -1,42 +1,23 @@
 <template>
     <span>
-        <v-app-bar app>
-            <!-- <v-icon ></v-icon> -->
-            <v-btn @click.stop="$router.push('/')" icon>
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
-
-            <!-- <v-toolbar-title>Речная 113, кв.91</v-toolbar-title> -->
-
-            <v-list-item three-line>
-                <v-list-item-content>
-                    <v-list-item-title>{{ _device.name }}</v-list-item-title>
-                    <!-- <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle> -->
-                </v-list-item-content>
-            </v-list-item>
-
-            <v-spacer></v-spacer>
-
-            <aqua-bast-icon
-                name="cloud"
-                size="56px"
-                color="secondary"
-            ></aqua-bast-icon>
-
-            <v-btn icon class="ml-2">
-                <!-- должен быть скатик! -->
-                <aqua-bast-icon
-                    name="INFO"
-                    size="40px"
-                    color="primary"
-                ></aqua-bast-icon>
-            </v-btn>
-        </v-app-bar>
+        <navigation :title="_device.name" />
 
         <div class="dashboard">
-            <div class="infobox absolute-container">
-                <v-layout justify-center>header</v-layout>
+            <div
+                class="infobox absolute-container d-flex justify-space-around align-center"
+            >
+                <v-card width="90%" height="90%">
+                    <v-card-title
+                        class="text-truncate font-weight-regular pt-1"
+                        >{{ _device.name }}</v-card-title
+                    >
+
+                    <v-card-subtitle class="font-weight-regular pb-1">{{
+                        _device.description
+                    }}</v-card-subtitle>
+                </v-card>
             </div>
+
             <div class="buttons absolute-container">
                 <div class="dashboard-button button-top-left">tl</div>
                 <div class="dashboard-button button-top-right">tr</div>
@@ -64,7 +45,7 @@
                             <aqua-bast-icon
                                 :name="item.icon"
                                 size="40px"
-                                color="secondary"
+                                color="primary"
                             ></aqua-bast-icon>
                         </v-btn>
                     </template>
@@ -84,12 +65,14 @@
 </template>
 
 <script>
+import Navigation from '@/components/NavReturn.vue';
 import Indicator from '@/components/DashboardIndicator.vue';
 import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
 
 export default {
     components: {
         Indicator,
+        Navigation,
         AquaBastIcon
     },
 
@@ -207,7 +190,7 @@ export default {
         left: 0%;
         width: 100%;
         height: 20%;
-        background: blueviolet;
+        /* background: blueviolet; */
     }
 
     .indicator {
@@ -266,7 +249,7 @@ export default {
         left: 50%;
         width: 50%;
         height: 20%;
-        background: blueviolet;
+        /* background: blueviolet; */
     }
 
     .indicator {

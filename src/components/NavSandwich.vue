@@ -1,21 +1,27 @@
 <template>
     <span>
-        <v-app-bar app>
+        <v-app-bar :color="barColor" dark app>
             <!-- Hamburger -->
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-
             <v-toolbar-title>{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>mdi-help-circle</v-icon>
+            <v-btn icon class="ml-2">
+                <!-- должен быть скатик! -->
+                <aqua-bast-icon
+                    name="INFO"
+                    size="40px"
+                    color="white"
+                ></aqua-bast-icon>
             </v-btn>
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" temporary app>
-            <!-- <v-subheader>Пользователь:</v-subheader> -->
-            <v-list-item>
-                <v-list-item-avatar>
-                    <v-img src="../assets/araragi.jpg"></v-img>
+            <!-- <v-list-item class="deep-purple accent-4">
+                <v-list-item-avatar color="white">
+                    <aqua-bast-icon
+                        name="LOGO"
+                        color="#01488A"
+                    ></aqua-bast-icon>
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>{{ name }}</v-list-item-title>
@@ -23,9 +29,29 @@
                     <v-list-item-subtitle>{{ mail }}</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
-            <div class="pa-2">
+            <div class="deep-purple accent-4 pa-2">
                 <v-btn block rounded text>Выход из системы</v-btn>
-            </div>
+            </div> -->
+
+            <v-sheet :color="barColor" dark tile>
+                <v-list-item>
+                    <v-list-item-avatar color="white">
+                        <aqua-bast-icon
+                            name="LOGO"
+                            color="#01488A"
+                        ></aqua-bast-icon>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                        <v-list-item-title>{{ name }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ phone }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ mail }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
+                <div class="pa-2">
+                    <v-btn block rounded text>Выход из системы</v-btn>
+                </div>
+            </v-sheet>
 
             <v-list dense rounded>
                 <template v-for="(item, i) in navDraverItems">
@@ -40,13 +66,13 @@
                         v-else-if="item.divider"
                         :key="i"
                         dark
-                        class="my-4"
+                        class="my-2"
                     />
                     <v-list-item v-else :key="i" :to="item.path" link>
                         <v-list-item-action>
                             <aqua-bast-icon
                                 size="24px"
-                                color="secondary"
+                                color="ab_color"
                                 :name="item.icon"
                             ></aqua-bast-icon>
                         </v-list-item-action>
@@ -98,6 +124,11 @@ export default {
         title() {
             return 'AquaBast';
         },
+
+        barColor() {
+            return !this.$vuetify.theme.dark ? 'primary' : '';
+        },
+
         name() {
             return this.$store.state.credentials.username;
         },
@@ -125,7 +156,7 @@ export default {
             drawer: false,
             darkMode: false,
             navDraverItems: [
-                { divider: true },
+                // { divider: true },
                 {
                     title: 'Журнал событий',
                     icon: 'journal',
@@ -134,7 +165,7 @@ export default {
                 {
                     title: 'Настройки',
                     icon: 'settings',
-                    path: 'settings'
+                    path: '/settings/application'
                 },
                 { divider: true },
                 {

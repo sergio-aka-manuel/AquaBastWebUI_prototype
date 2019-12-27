@@ -1,59 +1,71 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+
 import About from "../views/About";
-import Login from '../views/Login.vue'
 
-import Devices from '../views/Devices.vue'
-import Graphs from '../views/Graphs.vue'
-import Logs from '../views/Logs.vue'
+// import Login from '../views/Login.vue'
+// import LoginConfirmation from '../views/LoginConfirm.vue'
 
-import LoginConfirmation from '../views/LoginConfirmation.vue'
+// import Journal from '../views/Journal.vue'
+import Settings from '../views/Settings.vue'
+
+import DeviceList from "../views/DeviceList.vue";
 import Dashboard from '../views/Dashboard.vue'
+// import Subdevices from '../views/Subdevices.vue'
+// import DevCharts from '../views/Graphs.vue'
+
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    name: 'home',
-    path: '/',
-    component: Home
-  },
   {
     name: 'about',
     path: '/about',
     component: About,
   },
   {
-    name: 'login',
-    path: '/login',
-    component: Login,
-  },
-  {
-    name: 'confirm',
-    path: '/confirm',
-    component: LoginConfirmation,
+    name: 'deviceList',
+    path: '/',
+    component: DeviceList
   },
   {
     name: 'dashboard',
     path: '/dashboard/:uid',
     component: Dashboard,
   },
+  // {
+  //   name: 'journal',
+  //   path: '/journal/:uid',
+  //   component: Journal,
+  // },
   {
-    name: 'logs',
-    path: '/logs/:uid',
-    component: Logs,
+    name: 'settings',
+    path: '/settings/:uid',
+    component: Settings,
   },
-  {
-    name: 'graphs',
-    path: '/graphs/:uid',
-    component: Graphs,
-  },
-  {
-    name: 'devices',
-    path: '/devices/:uid',
-    component: Devices,
-  }
+
+
+
+  // {
+  //   name: 'login',
+  //   path: '/login',
+  //   component: Login,
+  // },
+  // {
+  //   name: 'confirm',
+  //   path: '/confirm',
+  //   component: LoginConfirmation,
+  // },
+  // {
+  //   name: 'graphs',
+  //   path: '/graphs/:uid',
+  //   component: Graphs,
+  // },
+  // {
+  //   name: 'subdevices',
+  //   path: '/subdevices/:uid',
+  //   component: Subdevices,
+  // }
 
   // {
   //   path: "/about",
