@@ -6,13 +6,15 @@ import About from "../views/About";
 // import Login from '../views/Login.vue'
 // import LoginConfirmation from '../views/LoginConfirm.vue'
 
-// import Journal from '../views/Journal.vue'
+import Charts from '../views/Charts.vue'
+import Journal from '../views/Journal.vue'
 import Settings from '../views/Settings.vue'
+
 
 import DeviceList from "../views/DeviceList.vue";
 import Dashboard from '../views/Dashboard.vue'
 // import Subdevices from '../views/Subdevices.vue'
-// import DevCharts from '../views/Graphs.vue'
+
 
 
 Vue.use(VueRouter);
@@ -20,7 +22,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     name: 'about',
-    path: '/about',
+    path: '/about/:uid',
     component: About,
   },
   {
@@ -33,11 +35,16 @@ const routes = [
     path: '/dashboard/:uid',
     component: Dashboard,
   },
-  // {
-  //   name: 'journal',
-  //   path: '/journal/:uid',
-  //   component: Journal,
-  // },
+  {
+    name: 'charts',
+    path: '/charts/:uid',
+    component: Charts,
+  },
+  {
+    name: 'journal',
+    path: '/journal/:uid',
+    component: Journal,
+  },
   {
     name: 'settings',
     path: '/settings/:uid',
@@ -55,11 +62,6 @@ const routes = [
   //   name: 'confirm',
   //   path: '/confirm',
   //   component: LoginConfirmation,
-  // },
-  // {
-  //   name: 'graphs',
-  //   path: '/graphs/:uid',
-  //   component: Graphs,
   // },
   // {
   //   name: 'subdevices',

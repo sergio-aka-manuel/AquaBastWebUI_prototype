@@ -160,7 +160,7 @@ export default {
                 {
                     title: 'Журнал событий',
                     icon: 'journal',
-                    path: 'journal'
+                    path: '/journal/all'
                 },
                 {
                     title: 'Настройки',
@@ -171,7 +171,7 @@ export default {
                 {
                     title: 'О программе',
                     icon: 'INFO',
-                    path: 'about'
+                    path: '/about/application'
                 }
             ]
         };

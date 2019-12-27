@@ -1,12 +1,12 @@
 <template>
     <span>
-        <navigation :title="_device.name" />
+        <navigation :title="device.name" />
 
         <div class="dashboard">
             <div
                 class="infobox absolute-container d-flex justify-space-around align-center"
             >
-                <v-card width="90%" height="90%">
+                <!-- <v-card width="90%" height="90%">
                     <v-card-title
                         class="text-truncate font-weight-regular pt-1"
                         >{{ _device.name }}</v-card-title
@@ -15,7 +15,7 @@
                     <v-card-subtitle class="font-weight-regular pb-1">{{
                         _device.description
                     }}</v-card-subtitle>
-                </v-card>
+                </v-card> -->
             </div>
 
             <div class="buttons absolute-container">
@@ -25,7 +25,7 @@
                 <div class="dashboard-button button-bottom-right">br</div>
             </div>
             <div class="indicator absolute-container">
-                <indicator v-bind:_device="_device"></indicator>
+                <indicator v-bind:device="device"></indicator>
                 <div class="water-counter hot-water">
                     <div id="HotWaterCounter"></div>
                 </div>
@@ -36,12 +36,7 @@
             <div class="footer absolute-container ">
                 <div class="d-flex justify-space-around align-stretch">
                     <template v-for="(item, i) in menuItems">
-                        <v-btn
-                            class="mt-1"
-                            :to="getMenuItemPath(item.path)"
-                            :key="i"
-                            text
-                        >
+                        <v-btn class="mt-1" :to="item.path" :key="i" text link>
                             <aqua-bast-icon
                                 :name="item.icon"
                                 size="40px"
@@ -76,16 +71,10 @@ export default {
         AquaBastIcon
     },
 
-    methods: {
-        getMenuItemPath(dest) {
-            const path = '/' + dest + '/' + this._device.uid;
-            // window.console.log(dest + ' -> ' + path);
-            return path;
-        }
-    },
+    methods: {},
 
     computed: {
-        _device() {
+        device() {
             const uid = this.$route.params.uid;
             var dev = this.$store.state.devices.filter(function(d) {
                 return d.uid == uid;
@@ -93,34 +82,37 @@ export default {
 
             // window.console.log(d);
             return dev[0];
+        },
+
+        menuItems() {
+            return [
+                {
+                    title: 'Устройства',
+                    icon: 'devices',
+                    path: '/devices/' + this.device.uid
+                },
+                {
+                    title: 'Графики',
+                    icon: 'charts',
+                    path: '/charts/' + this.device.uid
+                },
+                {
+                    title: 'Журнал',
+                    icon: 'journal',
+                    path: '/journal/' + this.device.uid
+                },
+                {
+                    title: 'Настройки',
+                    icon: 'settings',
+                    path: '/settings/' + this.device.uid
+                }
+            ];
         }
     },
 
     data() {
         return {
-            activeBtn: -1,
-            menuItems: [
-                {
-                    title: 'Устройства',
-                    icon: 'devices',
-                    path: 'devices'
-                },
-                {
-                    title: 'Графики',
-                    icon: 'charts',
-                    path: 'charts'
-                },
-                {
-                    title: 'Журнал',
-                    icon: 'journal',
-                    path: 'journal'
-                },
-                {
-                    title: 'Настройки',
-                    icon: 'settings',
-                    path: 'settings'
-                }
-            ]
+            activeBtn: -1
         };
     }
 };

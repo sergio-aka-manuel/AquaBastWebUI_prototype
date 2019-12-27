@@ -8,31 +8,10 @@
         <v-toolbar-title class="pl-2" style="width: 85%; font-size: 0.9rem;">{{
             title
         }}</v-toolbar-title>
-        <!-- <v-card-title class="px-1 py-1" >
-            <span
-                class="d-inline-block text-truncate font-weight-regular"
-                v-text="name"
-            />
-        </v-card-title> -->
-
-        <!-- <v-list-item three-line>
-            <v-list-item-content>
-                <v-list-item-title>{{ title }}</v-list-item-title>
-                <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item> -->
-
-        <!-- <v-list-item three-line>
-            <v-list-item-content>
-                <v-list-item-title class="text-truncate font-weight-regular"
-                    >UID: {{ this.$route.params.uid }}</v-list-item-title
-                >
-            </v-list-item-content>
-        </v-list-item> -->
 
         <v-spacer></v-spacer>
 
-        <aqua-bast-icon name="cloud" size="64px" color="white"></aqua-bast-icon>
+        <aqua-bast-icon name="cloud" size="48px" color="white"></aqua-bast-icon>
 
         <v-btn icon class="ml-0">
             <!-- должен быть скатик! -->

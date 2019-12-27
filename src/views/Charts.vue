@@ -3,7 +3,7 @@
         <navigation :title="'UID: ' + $route.params.uid" />
 
         <v-layout>
-            <h2 class="ma-auto pa-4">About page</h2>
+            <h2 class="ma-auto pa-4">Charts page</h2>
         </v-layout>
 
         <v-layout justify-center>

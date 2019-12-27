@@ -1,6 +1,6 @@
 <template>
     <v-card
-        :href="'dashboard/' + device.uid"
+        @click.stop="$router.push('dashboard/' + device.uid)"
         :ripple="false"
         color="defult"
         elevation="4"
