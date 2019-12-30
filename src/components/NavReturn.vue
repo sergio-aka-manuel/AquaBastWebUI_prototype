@@ -5,7 +5,7 @@
             <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
 
-        <v-toolbar-title class="pl-2" style="width: 85%; font-size: 0.9rem;">{{
+        <v-toolbar-title class="pl-2" style="width: 85%;">{{
             title
         }}</v-toolbar-title>
 

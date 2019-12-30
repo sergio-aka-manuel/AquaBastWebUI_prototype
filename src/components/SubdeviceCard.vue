@@ -3,21 +3,14 @@
         <v-row no-gutters>
             <transition name="fade" mode="out-in">
                 <v-col cols="2" v-show="!expanded">
-                    <subdevice-complex-icon :subdevice="device" />
+                    <subdevice-complex-icon :subdevice="subdevice" />
                 </v-col>
             </transition>
             <v-col>
                 <v-row no-gutters>
                     <transition name="fade" mode="out-in">
-                        <v-card-title
-                            v-if="!expanded"
-                            class="px-1 py-1"
-                            style="width: 85%;"
-                        >
-                            <span
-                                class="d-inline-block text-truncate font-weight-regular"
-                                v-text="name"
-                            />
+                        <v-card-title v-if="!expanded" class="px-1 py-1" style="width: 85%;">
+                            <span class="d-inline-block text-truncate font-weight-regular">{{name}}</span>
                         </v-card-title>
 
                         <v-text-field
@@ -35,14 +28,12 @@
                     <v-spacer></v-spacer>
 
                     <transition name="fade" mode="out-in">
-                        <v-btn
-                            icon
-                            :key="expanded"
-                            @click="expanded = !expanded"
-                        >
-                            <v-icon>{{
+                        <v-btn icon :key="expanded" @click="expanded = !expanded">
+                            <v-icon>
+                                {{
                                 expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'
-                            }}</v-icon>
+                                }}
+                            </v-icon>
                         </v-btn>
                     </transition>
                 </v-row>
@@ -50,7 +41,7 @@
                 <v-row no-gutters>
                     <transition name="fade" mode="out-in">
                         <v-card-subtitle v-if="!expanded" class="px-1 py-0">
-                            {{ description }}
+                            <span>{{ description }}</span>
                         </v-card-subtitle>
 
                         <v-textarea
@@ -71,61 +62,33 @@
             <div v-if="expanded">
                 <v-divider class="mt-4 mx-2" />
 
-                <v-row
-                    no-gutters
-                    justify="start"
-                    align="center"
-                    class="caption mx-4 mt-2"
-                >
-                    <aqua-bast-icon-device
-                        size="24px"
-                        :data="deviceStates"
-                        :device="device"
-                    ></aqua-bast-icon-device>
+                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
+                    <aqua-bast-icon-device size="24px" :data="deviceStates" :device="subdevice"></aqua-bast-icon-device>
 
                     <span class="ml-4" v-text="'Состояние:'" />
-                    <span
-                        class="ml-auto font-weight-bold"
-                        v-text="deviceStateText"
-                    />
+                    <span class="ml-auto font-weight-bold" v-text="deviceStateText" />
                 </v-row>
 
-                <v-row
-                    no-gutters
-                    justify="start"
-                    align="center"
-                    class="caption mx-4 mt-2"
-                >
+                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
                     <aqua-bast-icon-level
                         size="24px"
                         :data="powerLevels"
-                        :level="device.powerLevel"
+                        :level="subdevice.powerLevel"
                     ></aqua-bast-icon-level>
 
                     <span class="ml-4" v-text="'Заряд батареи:'" />
-                    <span
-                        class="ml-auto font-weight-bold"
-                        v-text="powerLevelText.text"
-                    />
+                    <span class="ml-auto font-weight-bold" v-text="powerLevelText.text" />
                 </v-row>
 
-                <v-row
-                    no-gutters
-                    justify="start"
-                    align="center"
-                    class="caption mx-4 mt-2"
-                >
+                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
                     <aqua-bast-icon-level
                         size="24px"
                         :data="radioLevels"
-                        :level="device.radioLevel"
+                        :level="subdevice.radioLevel"
                     ></aqua-bast-icon-level>
 
                     <span class="ml-4" v-text="'Уровень радиосигнала:'" />
-                    <span
-                        class="ml-auto font-weight-bold"
-                        v-text="radioLevelText.text"
-                    />
+                    <span class="ml-auto font-weight-bold" v-text="radioLevelText.text" />
                 </v-row>
 
                 <v-divider class="mt-4 mx-2" />
@@ -158,6 +121,7 @@
 import SubdeviceComplexIcon from '@/components/SubdeviceComplexIcon.vue';
 import AquaBastIconLevel from '@/components/SvgIcons/Level.vue';
 import AquaBastIconDevice from '@/components/SvgIcons/Device.vue';
+import { isUndefined } from 'util';
 
 export default {
     components: {
@@ -167,44 +131,34 @@ export default {
     },
 
     props: {
-        device: [Object],
+        subdevice: [Object],
         selected: []
     },
 
-    methods: {
-        getComponentName(component) {
-            return (
-                this.$store.state.const.deviceDefaults[component.type].name +
-                (1 + component.number)
-            );
-        },
-
-        getComponentDescription(component) {
-            return (
-                this.$store.state.const.deviceDefaults[component.type]
-                    .description + component.host
-            );
-        }
-    },
+    methods: {},
 
     computed: {
+        textSource() {
+            const src = this.$store.state.const.deviceDefaults;
+            return isUndefined(src[this.subdevice.type])
+                ? src['undefined']
+                : src[this.subdevice.type];
+        },
+
         name() {
-            return this.device.name
-                ? this.device.name
-                : this.$store.state.const.deviceDefaults[this.device.type]
-                      .name +
-                      (1 + this.device.number);
+            return this.subdevice.name
+                ? this.subdevice.name
+                : this.textSource.name + (1 + this.subdevice.number);
         },
 
         description() {
-            return this.device.description
-                ? this.device.description
-                : this.$store.state.const.deviceDefaults[this.device.type]
-                      .description + this.device.host;
+            return this.subdevice.description
+                ? this.subdevice.description
+                : this.textSource.description + this.subdevice.host;
         },
 
         state() {
-            return this.device.type + '_' + this.device.state;
+            return this.subdevice.type + '_' + this.subdevice.state;
         },
 
         deviceStates() {
@@ -226,15 +180,15 @@ export default {
 
         radioLevelText() {
             return {
-                text: this.radioLevels[this.device.radioLevel].text,
-                color: this.radioLevels[this.device.radioLevel].color
+                text: this.radioLevels[this.subdevice.radioLevel].text,
+                color: this.radioLevels[this.subdevice.radioLevel].color
             };
         },
 
         powerLevelText() {
             return {
-                text: this.powerLevels[this.device.powerLevel].text,
-                color: this.powerLevels[this.device.powerLevel].color
+                text: this.powerLevels[this.subdevice.powerLevel].text,
+                color: this.powerLevels[this.subdevice.powerLevel].color
             };
         }
     },

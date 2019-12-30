@@ -18,11 +18,7 @@
             <v-spacer></v-spacer>
 
             <!-- должен быть скатик! -->
-            <aqua-bast-icon
-                name="INFO"
-                size="48px"
-                color="primary"
-            ></aqua-bast-icon>
+            <aqua-bast-icon name="INFO" size="48px" color="primary"></aqua-bast-icon>
 
             <template v-slot:extension>
                 <v-tabs v-model="tab" fixed-tabs background-color="transparent">
@@ -33,11 +29,7 @@
                         :key="i"
                         class="priamary--text"
                     >
-                        <aqua-bast-icon
-                            :name="item.icon"
-                            size="36px"
-                            color="primary"
-                        ></aqua-bast-icon>
+                        <aqua-bast-icon :name="item.icon" size="36px" color="primary"></aqua-bast-icon>
                     </v-tab>
                 </v-tabs>
             </template>
@@ -45,11 +37,9 @@
 
         <v-tabs-items v-model="tab">
             <v-tab-item v-for="(item, i) in tabs" :value="item.name" :key="i">
-                <subdevice-sensor
-                    v-for="(subdevice, i) in components.filter(subdevice => {
-                        return true;
-                    })"
-                    :device="subdevice"
+                <subdevice-card
+                    v-for="(item, i) in filteredSubdevices"
+                    :subdevice="item"
                     :key="i"
                 />
             </v-tab-item>
@@ -61,16 +51,16 @@
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
 
 import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
-import SubdeviceSensor from '@/components/DeviceSensor.vue';
+import SubdeviceCard from '@/components/SubdeviceCard.vue';
 import { isUndefined } from 'util';
 
 export default {
     components: {
         AquaBastIcon,
-        SubdeviceSensor
+        SubdeviceCard
     },
 
-    mounted() {
+    created() {
         const uid = this.$route.params.uid;
         var dev = this.$store.state.devices.filter(function(d) {
             return d.uid == uid;
@@ -79,37 +69,15 @@ export default {
         this.device = dev[0];
     },
 
-    methods: {
-        getKey(component) {
-            window.console.log('expanded = ' + this.expanded);
-
-            return (
-                component.uid + '.' + component.type + '#' + component.number
-            );
-        },
-
-        getComponentName(component) {
-            return (
-                this.$store.state.const.deviceDefaults[component.type].name +
-                (1 + component.number)
-            );
-        },
-
-        getComponentDescription(component) {
-            return (
-                this.$store.state.const.deviceDefaults[component.type]
-                    .description + component.host
-            );
-        }
-    },
+    methods: {},
 
     computed: {
-        components() {
+        subdevices() {
             if (
                 !isUndefined(this.device) &&
-                !isUndefined(this.device.components)
+                !isUndefined(this.device.subdevices)
             ) {
-                var items = this.device.components.map(function(item) {
+                var items = this.device.subdevices.map(function(item) {
                     return item;
                 });
 
@@ -132,35 +100,31 @@ export default {
                     return 0;
                 });
             }
-            return null;
+            return undefined;
         },
 
-        valves() {
-            return this.components
-                ? this.components.filter(item => {
-                      return item.type == 'valve' || item.type == 'relay';
-                  })
-                : null;
-        },
+        filteredSubdevices() {
+            if (!isUndefined(this.subdevices))
+                return this.subdevices.filter(item => {
+                    if (this.tab == 'sensors')
+                        return (
+                            item.type == 'wireless_sensor' ||
+                            item.type == 'wired_sensor'
+                        );
 
-        sensors() {
-            return this.components
-                ? this.components.filter(item => {
-                      return (
-                          item.type == 'wireless_sensor' ||
-                          item.type == 'wired_sensor'
-                      );
-                  })
-                : null;
+                    if (this.tab == 'drives')
+                        return item.type == 'valve' || item.type == 'relay';
+
+                    // All
+                    return true;
+                });
+            else return null;
         }
     },
 
     data() {
         return {
             device: {},
-
-            text:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 
             expanded: '',
 
