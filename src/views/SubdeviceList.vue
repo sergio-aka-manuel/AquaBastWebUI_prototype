@@ -25,38 +25,17 @@
             ></aqua-bast-icon>
 
             <template v-slot:extension>
-                <v-tabs
-                    v-model="tabs"
-                    fixed-tabs
-                    background-color="transparent"
-                >
+                <v-tabs v-model="tab" fixed-tabs background-color="transparent">
                     <v-tabs-slider color="primary"></v-tabs-slider>
-                    <v-tab href="#sensors" class="primary--text">
+                    <v-tab
+                        v-for="(item, i) in tabs"
+                        :href="'#' + item.name"
+                        :key="i"
+                        class="priamary--text"
+                    >
                         <aqua-bast-icon
-                            name="sensor"
+                            :name="item.icon"
                             size="36px"
-                            color="primary"
-                        ></aqua-bast-icon>
-                    </v-tab>
-
-                    <v-tab href="#valves" class="primary--text">
-                        <aqua-bast-icon
-                            name="valve-error"
-                            size="36px"
-                            color="primary"
-                        ></aqua-bast-icon>
-                    </v-tab>
-
-                    <v-tab href="#all" class="primary--text">
-                        <aqua-bast-icon
-                            name="sensor"
-                            size="24px"
-                            color="primary"
-                        ></aqua-bast-icon
-                        >+
-                        <aqua-bast-icon
-                            name="valve-error"
-                            size="24px"
                             color="primary"
                         ></aqua-bast-icon>
                     </v-tab>
@@ -64,56 +43,31 @@
             </template>
         </v-app-bar>
 
-        <v-tabs-items v-model="tabs">
-            <v-tab-item :value="'sensors'">
-                <device-sensor
-                    v-for="(component, i) in sensors"
-                    :device="component"
+        <v-tabs-items v-model="tab">
+            <v-tab-item v-for="(item, i) in tabs" :value="item.name" :key="i">
+                <subdevice-sensor
+                    v-for="(subdevice, i) in components.filter(subdevice => {
+                        return true;
+                    })"
+                    :device="subdevice"
                     :key="i"
-                ></device-sensor>
+                />
             </v-tab-item>
-
-            <v-tab-item> </v-tab-item>
-
-            <v-tab-item :value="'valves'">
-                <device-sensor
-                    v-for="(component, i) in valves"
-                    :device="component"
-                    :key="i"
-                ></device-sensor>
-            </v-tab-item>
-            <v-tab-item> </v-tab-item>
-
-            <v-tab-item :value="'all'">
-                <device-sensor
-                    v-for="(component, i) in components"
-                    :device="component"
-                    :key="i"
-                ></device-sensor>
-            </v-tab-item>
-            <v-tab-item> </v-tab-item>
         </v-tabs-items>
     </span>
 </template>
 
 <script>
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
-// expanded != getKey(component) ? expanded = getKey(component) : expanded = ''
-// import LeakageSensorCard from '@/components/LeakageSensorCard.vue';
-// import LeakageSensorCardExpanded from '@/components/LeakageSensorCardExpanded.vue';
 
 import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
-import DeviceSensor from '@/components/DeviceSensor.vue';
+import SubdeviceSensor from '@/components/DeviceSensor.vue';
 import { isUndefined } from 'util';
-// import AquaBastIconLevel from '@/components/SvgIcons/IconLevel.vue';
-// import AquaBastIconDevice from '@/components/SvgIcons/IconDevice.vue';
 
 export default {
     components: {
         AquaBastIcon,
-        DeviceSensor
-        // AquaBastIconLevel,
-        // AquaBastIconDevice
+        SubdeviceSensor
     },
 
     mounted() {
@@ -204,11 +158,18 @@ export default {
     data() {
         return {
             device: {},
-            tabs: null,
+
             text:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 
-            expanded: ''
+            expanded: '',
+
+            tab: null,
+            tabs: [
+                { name: 'sensors', icon: 'sensor' },
+                { name: 'drives', icon: 'valve-error' },
+                { name: 'all', icon: 'subdevices' }
+            ]
         };
     }
 };
