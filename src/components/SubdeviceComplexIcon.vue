@@ -2,7 +2,7 @@
     <span>
         <v-row no-gutters>
             <v-col class="ma-auto pt-1 px-0">
-                <svg-icon-device :index="index" />
+                <svg-icon-device :index="index" size="64px"/>
             </v-col>
         </v-row>
         <v-row no-gutters>
