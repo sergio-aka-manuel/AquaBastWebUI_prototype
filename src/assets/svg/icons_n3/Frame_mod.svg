@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="15"
+   height="32"
+   viewBox="0 0 15 32"
+   fill="none"
+   version="1.1"
+   id="svg3856"
+   sodipodi:docname="Frame_mod.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata3860">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview3858"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-grids="false"
+     inkscape:zoom="18.473165"
+     inkscape:cx="22.533147"
+     inkscape:cy="13.435299"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3856">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3862" />
+    <sodipodi:guide
+       position="5,27"
+       orientation="0,1"
+       id="guide3864"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <g
+     clip-path="url(#clip0)"
+     id="g3831">
+    <rect
+       width="15"
+       height="32"
+       id="rect3815"
+       x="0"
+       y="0"
+       style="fill:#ffffff" />
+    <path
+       d="M 0,0 H 15 V 32 H 0 Z"
+       id="path3817"
+       style="clip-rule:evenodd;fill:url(#paint0_linear);fill-rule:evenodd"
+       inkscape:connector-curvature="0" />
+    <g
+       clip-path="url(#clip1)"
+       id="g3821"
+       transform="translate(0,-1.6)">
+      <path
+         d="m 12.0977,16.9355 c 0,2.1159 -0.3614,3.6882 -1.084,4.7168 -0.7227,1.0287 -1.85224,1.543 -3.3887,1.543 -1.51693,0 -2.63997,-0.5013 -3.36914,-1.5039 -0.72917,-1.0091 -1.10677,-2.513 -1.13281,-4.5117 v -2.4121 c 0,-2.0899 0.36133,-3.6426 1.08398,-4.6582 0.72266,-1.01565 1.85547,-1.52346 3.39844,-1.52346 1.52995,0 2.65623,0.49153 3.37893,1.47456 0.7226,0.9766 1.0937,2.487 1.1133,4.5313 z M 10.291,14.4648 c 0,-1.5299 -0.2148,-2.6432 -0.64452,-3.3398 -0.42968,-0.7031 -1.11002,-1.0547 -2.04101,-1.0547 -0.92448,0 -1.59831,0.3483 -2.02149,1.0449 -0.42317,0.6966 -0.64127,1.7676 -0.65429,3.2129 v 2.8907 c 0,1.5364 0.22135,2.6725 0.66406,3.4082 0.44922,0.7291 1.1263,1.0937 2.03125,1.0937 0.89193,0 1.55273,-0.345 1.98242,-1.0352 0.43618,-0.6901 0.66408,-1.7773 0.68358,-3.2617 z"
+         id="path3819"
+         inkscape:connector-curvature="0"
+         style="fill:#000000" />
+    </g>
+    <g
+       clip-path="url(#clip2)"
+       id="g3825">
+      <path
+         d="M 9.11914,44 H 7.30273 V 31.959 l -3.64257,1.3379 v -1.6407 l 5.17578,-1.9433 h 0.2832 z"
+         id="path3823"
+         inkscape:connector-curvature="0"
+         style="fill:#000000" />
+    </g>
+    <g
+       clip-path="url(#clip3)"
+       id="g3829">
+      <path
+         d="M 10.1055,-6.25 C 9.72786,-5.80078 9.27539,-5.43945 8.74805,-5.16602 8.22721,-4.89258 7.6543,-4.75586 7.0293,-4.75586 6.20898,-4.75586 5.49284,-4.95768 4.88086,-5.36133 4.27539,-5.76497 3.80664,-6.33138 3.47461,-7.06055 3.14258,-7.79622 2.97656,-8.60677 2.97656,-9.49219 c 0,-0.95052 0.17904,-1.80661 0.53711,-2.56831 0.36459,-0.7618 0.87891,-1.3444 1.54297,-1.7481 0.66406,-0.4036 1.4388,-0.6055 2.32422,-0.6055 1.40625,0 2.51302,0.5274 3.32034,1.5821 0.8138,1.0481 1.2207,2.48044 1.2207,4.29684 v 0.52735 c 0,2.76692 -0.5469,4.78841 -1.6407,6.064451 C 9.1875,-0.673828 7.53711,-0.022786 5.33008,0.00977 H 4.97852 V -1.513672 H 5.35938 C 6.85026,-1.539714 7.99609,-1.927083 8.79688,-2.67578 9.59766,-3.43099 10.0339,-4.6224 10.1055,-6.25 Z m -2.78323,0 c 0.60546,0 1.16211,-0.18555 1.66992,-0.55664 0.51432,-0.37109 0.88867,-0.83008 1.12301,-1.37695 v -0.72266 c 0,-1.1849 -0.25713,-2.14845 -0.77145,-2.89065 -0.51432,-0.7422 -1.16536,-1.1133 -1.95313,-1.1133 -0.79427,0 -1.43229,0.306 -1.91406,0.918 -0.48177,0.6055 -0.72265,1.40626 -0.72265,2.40236 0,0.97005 0.23112,1.77083 0.69336,2.40234 0.46875,0.625 1.09375,0.9375 1.875,0.9375 z"
+         id="path3827"
+         inkscape:connector-curvature="0"
+         style="fill:#000000" />
+    </g>
+  </g>
+  <defs
+     id="defs3854">
+    <linearGradient
+       id="paint0_linear"
+       x1="7.5"
+       y1="0"
+       x2="7.5"
+       y2="32"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.00"
+         stop-color="#B4B4B4"
+         id="stop3833" />
+      <stop
+         offset="0.25"
+         stop-color="#FFFFFF"
+         stop-opacity="0"
+         id="stop3835" />
+      <stop
+         offset="0.75"
+         stop-color="#FFFFFF"
+         stop-opacity="0"
+         id="stop3837" />
+      <stop
+         offset="1.00"
+         stop-color="#B4B4B4"
+         id="stop3839" />
+    </linearGradient>
+    <clipPath
+       id="clip0">
+      <rect
+         width="15"
+         height="32"
+         fill="white"
+         id="rect3842" />
+    </clipPath>
+    <clipPath
+       id="clip1">
+      <rect
+         x="2"
+         y="5"
+         width="11"
+         height="22"
+         fill="white"
+         id="rect3845" />
+    </clipPath>
+    <clipPath
+       id="clip2">
+      <rect
+         x="2"
+         y="27"
+         width="11"
+         height="22"
+         fill="white"
+         id="rect3848" />
+    </clipPath>
+    <clipPath
+       id="clip3">
+      <rect
+         x="2"
+         y="-17"
+         width="11"
+         height="22"
+         fill="white"
+         id="rect3851" />
+    </clipPath>
+  </defs>
+</svg>

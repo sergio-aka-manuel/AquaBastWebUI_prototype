@@ -27,10 +27,22 @@
             <div class="indicator absolute-container">
                 <indicator v-bind:device="device"></indicator>
                 <div class="water-counter hot-water">
-                    <div id="HotWaterCounter"></div>
+                    <!-- <div id="HotWaterCounter"></div> -->
+                    <water-counter
+                        v-if="device.config.hotWaterCounterEnabled"
+                        :value="hotWaterCounterValue"
+                        integerColor="black"
+                        fractionalColor="red"
+                    />
                 </div>
                 <div class="water-counter cold-water">
-                    <div id="ColdWaterCounter"></div>
+                    <!-- <div id="ColdWaterCounter"></div> -->
+                    <water-counter
+                        v-if="device.config.coldWaterCounterEnabled"
+                        :value="coldWaterCounterValue"
+                        integerColor="black"
+                        fractionalColor="red"
+                    />
                 </div>
             </div>
             <div class="footer absolute-container ">
@@ -63,12 +75,21 @@
 import Navigation from '@/components/NavReturn.vue';
 import Indicator from '@/components/DashboardIndicator.vue';
 import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+import WaterCounter from '@/components/SvgWaterCounter/WaterCounter.vue';
 
 export default {
     components: {
         Indicator,
         Navigation,
-        AquaBastIcon
+        AquaBastIcon,
+        WaterCounter
+    },
+
+    mounted() {
+        setInterval(() => {
+            this.coldWaterCounterValue += Math.random() * 30;
+            this.hotWaterCounterValue += Math.random() * 10;
+        }, 1100);
     },
 
     methods: {},
@@ -112,7 +133,9 @@ export default {
 
     data() {
         return {
-            activeBtn: -1
+            activeBtn: -1,
+            hotWaterCounterValue: 0,
+            coldWaterCounterValue: 0
         };
     }
 };
@@ -151,28 +174,27 @@ export default {
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 
-    width: fit-content;
+    width: 48vmin;
     line-height: normal;
 
-    font-size: 7vmin;
-
-    border-radius: 8px;
-    border: 2px solid white;
-    background: black;
+    /* font-size: 7vmin; */
+    /* border-radius: 8px; */
+    /* border: 2px solid white; */
+    /* background: black; */
 }
 
 .hot-water {
     left: 50%;
-    top: 50%;
+    top: 54%;
     transform: translate(-50%, -130%);
-    background: blueviolet;
+    /* background: blueviolet; */
 }
 
 .cold-water {
     left: 50%;
-    top: 50%;
+    top: 47%;
     transform: translate(-50%, 35%);
-    background: blueviolet;
+    /* background: blueviolet; */
 }
 
 /* Portrait */
