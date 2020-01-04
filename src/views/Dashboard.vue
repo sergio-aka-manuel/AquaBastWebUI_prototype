@@ -25,10 +25,10 @@
                 <div class="dashboard-button button-bottom-right">br</div>
             </div>
             <div class="indicator absolute-container">
-                <indicator v-bind:device="device"></indicator>
+                <svg-indicator v-bind:device="device" />
                 <div class="water-counter hot-water">
                     <!-- <div id="HotWaterCounter"></div> -->
-                    <water-counter
+                    <svg-water-counter
                         v-if="device.config.hotWaterCounterEnabled"
                         :value="hotWaterCounterValue"
                         integerColor="black"
@@ -37,7 +37,7 @@
                 </div>
                 <div class="water-counter cold-water">
                     <!-- <div id="ColdWaterCounter"></div> -->
-                    <water-counter
+                    <svg-water-counter
                         v-if="device.config.coldWaterCounterEnabled"
                         :value="coldWaterCounterValue"
                         integerColor="black"
@@ -49,11 +49,11 @@
                 <div class="d-flex justify-space-around align-stretch">
                     <template v-for="(item, i) in menuItems">
                         <v-btn class="mt-1" :to="item.path" :key="i" text link>
-                            <aqua-bast-icon
+                            <svg-icon
                                 :name="item.icon"
                                 size="40px"
                                 color="primary"
-                            ></aqua-bast-icon>
+                            />
                         </v-btn>
                     </template>
 
@@ -73,16 +73,16 @@
 
 <script>
 import Navigation from '@/components/NavReturn.vue';
-import Indicator from '@/components/DashboardIndicator.vue';
-import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
-import WaterCounter from '@/components/SvgWaterCounter/WaterCounter.vue';
+import SvgIcon from '@/components/Svg/Icon.vue';
+import SvgIndicator from '@/components/Svg/Indicator.vue';
+import SvgWaterCounter from '@/components/Svg/WaterCounter.vue';
 
 export default {
     components: {
-        Indicator,
         Navigation,
-        AquaBastIcon,
-        WaterCounter
+        SvgIcon,
+        SvgIndicator,
+        SvgWaterCounter
     },
 
     mounted() {

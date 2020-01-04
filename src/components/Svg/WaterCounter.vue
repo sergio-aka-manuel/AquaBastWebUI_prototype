@@ -30,7 +30,7 @@
                 fill="url(#gradient_linear)"
             />
             <!-- glyphs -->
-            <counter-digit :value="digit.value" :color="digit.color" />
+            <digit :value="digit.value" :color="digit.color" />
         </g>
 
         <!-- digits styling -->
@@ -58,12 +58,12 @@
 <style></style>
 
 <script>
-import CounterDigit from './CounterDigit.vue';
+import Digit from '@/components/Svg/WaterCounterDigit.vue';
 import { isNumber } from 'util';
 
 export default {
     components: {
-        CounterDigit
+        Digit
     },
 
     props: {

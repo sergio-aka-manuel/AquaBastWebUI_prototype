@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import SvgIconLevel from '@/components/SvgIcons/Level.vue';
-import SvgIconDevice from '@/components/SvgIcons/Device.vue';
+import SvgIconLevel from '@/components/Svg/IconLevel.vue';
+import SvgIconDevice from '@/components/Svg/IconDevice.vue';
 import { isUndefined } from 'util';
 
 export default {

@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+import AquaBastIcon from '@/components/Svg/Icon.vue';
 
 export default {
     components: {

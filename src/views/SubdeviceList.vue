@@ -1,62 +1,28 @@
 <template>
     <span>
-        <v-app-bar app>
-            <!-- <v-icon ></v-icon> -->
-            <v-btn @click.stop="$router.push('/')" icon>
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
+        <navigation
+            v-on:tab-changed="filter = $event"
+            :title="device.name"
+            :tabs="tabs"
+        />
 
-            <!-- <v-toolbar-title>Речная 113, кв.91</v-toolbar-title> -->
-
-            <v-list-item three-line>
-                <v-list-item-content>
-                    <v-list-item-title>{{ device.name }}</v-list-item-title>
-                    <!-- <v-list-item-subtitle>квартира, две строки текста помещаются</v-list-item-subtitle> -->
-                </v-list-item-content>
-            </v-list-item>
-
-            <v-spacer></v-spacer>
-
-            <!-- должен быть скатик! -->
-            <aqua-bast-icon name="INFO" size="48px" color="primary"></aqua-bast-icon>
-
-            <template v-slot:extension>
-                <v-tabs v-model="tab" fixed-tabs background-color="transparent">
-                    <v-tabs-slider color="primary"></v-tabs-slider>
-                    <v-tab
-                        v-for="(item, i) in tabs"
-                        :href="'#' + item.name"
-                        :key="i"
-                        class="priamary--text"
-                    >
-                        <aqua-bast-icon :name="item.icon" size="36px" color="primary"></aqua-bast-icon>
-                    </v-tab>
-                </v-tabs>
-            </template>
-        </v-app-bar>
-
-        <v-tabs-items v-model="tab">
-            <v-tab-item v-for="(item, i) in tabs" :value="item.name" :key="i">
-                <subdevice-card
-                    v-for="(item, i) in filteredSubdevices"
-                    :subdevice="item"
-                    :key="i"
-                />
-            </v-tab-item>
-        </v-tabs-items>
+        <subdevice-card
+            v-for="(item, i) in filteredSubdevices"
+            :subdevice="item"
+            :key="i"
+        />
     </span>
 </template>
 
 <script>
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
-
-import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+import Navigation from '@/components/NavReturn.vue';
 import SubdeviceCard from '@/components/SubdeviceCard.vue';
 import { isUndefined } from 'util';
 
 export default {
     components: {
-        AquaBastIcon,
+        Navigation,
         SubdeviceCard
     },
 
@@ -106,13 +72,13 @@ export default {
         filteredSubdevices() {
             if (!isUndefined(this.subdevices))
                 return this.subdevices.filter(item => {
-                    if (this.tab == 'sensors')
+                    if (this.filter == 'sensors')
                         return (
                             item.type == 'wireless_sensor' ||
                             item.type == 'wired_sensor'
                         );
 
-                    if (this.tab == 'drives')
+                    if (this.filter == 'drives')
                         return item.type == 'valve' || item.type == 'relay';
 
                     // All
@@ -128,7 +94,7 @@ export default {
 
             expanded: '',
 
-            tab: null,
+            filter: null,
             tabs: [
                 { name: 'sensors', icon: 'sensor' },
                 { name: 'drives', icon: 'valve-error' },

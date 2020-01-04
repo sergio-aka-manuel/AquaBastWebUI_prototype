@@ -1,14 +1,14 @@
 <template>
-    <aqua-bast-icon :name="name" :color="color" :size="size"></aqua-bast-icon>
+    <svg-icon :name="name" :color="color" :size="size" />
 </template>
 
 <script>
-import AquaBastIcon from '@/components/SvgIcons/Icon.vue';
+import SvgIcon from '@/components/Svg/Icon.vue';
 import { isUndefined } from 'util';
 
 export default {
     components: {
-        AquaBastIcon
+        SvgIcon
     },
 
     props: {

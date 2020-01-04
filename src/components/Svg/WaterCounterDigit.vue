@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import glyphs from "./digitGlyphs.json";
+import glyphs from "./data/digitGlyphs.json";
 
 export default {
   props: {

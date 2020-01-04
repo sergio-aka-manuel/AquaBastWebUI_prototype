@@ -79,11 +79,6 @@ svg {
 
 <script>
 export default {
-    mounted() {
-        // window.console.log('DI: ');
-        // window.console.log(this._device);
-    },
-
     props: {
         device: [Object]
     },
@@ -105,10 +100,6 @@ export default {
                 ? this.$store.state.const.AquaBastBlueColor
                 : this.$store.state.const.AquaBastRedColor;
         }
-    },
-
-    data() {
-        return {};
     }
 };
 </script>

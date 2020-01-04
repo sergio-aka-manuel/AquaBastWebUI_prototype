@@ -9,8 +9,15 @@
             <v-col>
                 <v-row no-gutters>
                     <transition name="fade" mode="out-in">
-                        <v-card-title v-if="!expanded" class="px-1 py-1" style="width: 85%;">
-                            <span class="d-inline-block text-truncate font-weight-regular">{{name}}</span>
+                        <v-card-title
+                            v-if="!expanded"
+                            class="px-1 py-1"
+                            style="width: 85%;"
+                        >
+                            <span
+                                class="d-inline-block text-truncate font-weight-regular"
+                                >{{ name }}</span
+                            >
                         </v-card-title>
 
                         <v-text-field
@@ -28,10 +35,16 @@
                     <v-spacer></v-spacer>
 
                     <transition name="fade" mode="out-in">
-                        <v-btn icon :key="expanded" @click="expanded = !expanded">
+                        <v-btn
+                            icon
+                            :key="expanded"
+                            @click="expanded = !expanded"
+                        >
                             <v-icon>
                                 {{
-                                expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                                    expanded
+                                        ? 'mdi-chevron-up'
+                                        : 'mdi-chevron-down'
                                 }}
                             </v-icon>
                         </v-btn>
@@ -46,11 +59,11 @@
 
                         <v-textarea
                             v-else
-                            prepend-icon="mdi-square-edit-outline"
-                            counter="128"
                             required
                             v-model="description"
+                            prepend-icon="mdi-square-edit-outline"
                             hint="Описание подключения/установки"
+                            counter="128"
                             class="mx-4"
                         ></v-textarea>
                     </transition>
@@ -62,33 +75,61 @@
             <div v-if="expanded">
                 <v-divider class="mt-4 mx-2" />
 
-                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
-                    <aqua-bast-icon-device size="24px" :data="deviceStates" :device="subdevice"></aqua-bast-icon-device>
+                <v-row
+                    no-gutters
+                    justify="start"
+                    align="center"
+                    class="caption mx-4 mt-2"
+                >
+                    <svg-icon-device
+                        size="24px"
+                        :data="deviceStates"
+                        :device="subdevice"
+                    />
 
                     <span class="ml-4" v-text="'Состояние:'" />
-                    <span class="ml-auto font-weight-bold" v-text="deviceStateText" />
+                    <span
+                        class="ml-auto font-weight-bold"
+                        v-text="deviceStateText"
+                    />
                 </v-row>
 
-                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
-                    <aqua-bast-icon-level
+                <v-row
+                    no-gutters
+                    justify="start"
+                    align="center"
+                    class="caption mx-4 mt-2"
+                >
+                    <svg-icon-level
                         size="24px"
                         :data="powerLevels"
                         :level="subdevice.powerLevel"
-                    ></aqua-bast-icon-level>
+                    />
 
                     <span class="ml-4" v-text="'Заряд батареи:'" />
-                    <span class="ml-auto font-weight-bold" v-text="powerLevelText.text" />
+                    <span
+                        class="ml-auto font-weight-bold"
+                        v-text="powerLevelText.text"
+                    />
                 </v-row>
 
-                <v-row no-gutters justify="start" align="center" class="caption mx-4 mt-2">
-                    <aqua-bast-icon-level
+                <v-row
+                    no-gutters
+                    justify="start"
+                    align="center"
+                    class="caption mx-4 mt-2"
+                >
+                    <svg-icon-level
                         size="24px"
                         :data="radioLevels"
                         :level="subdevice.radioLevel"
-                    ></aqua-bast-icon-level>
+                    />
 
                     <span class="ml-4" v-text="'Уровень радиосигнала:'" />
-                    <span class="ml-auto font-weight-bold" v-text="radioLevelText.text" />
+                    <span
+                        class="ml-auto font-weight-bold"
+                        v-text="radioLevelText.text"
+                    />
                 </v-row>
 
                 <v-divider class="mt-4 mx-2" />
@@ -119,15 +160,16 @@
 
 <script>
 import SubdeviceComplexIcon from '@/components/SubdeviceComplexIcon.vue';
-import AquaBastIconLevel from '@/components/SvgIcons/Level.vue';
-import AquaBastIconDevice from '@/components/SvgIcons/Device.vue';
+import SvgIconDevice from '@/components/Svg/IconDevice.vue';
+import SvgIconLevel from '@/components/Svg/IconLevel.vue';
+
 import { isUndefined } from 'util';
 
 export default {
     components: {
         SubdeviceComplexIcon,
-        AquaBastIconLevel,
-        AquaBastIconDevice
+        SvgIconDevice,
+        SvgIconLevel
     },
 
     props: {

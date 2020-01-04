@@ -8,14 +8,23 @@
 </template>
 
 <script>
-import svgData from './svgdata.json';
+import svgData from './data/iconGlyphs.json';
 import { isUndefined } from 'util';
 
 export default {
     props: {
-        name: String,
-        size: String,
-        color: String
+        name: {
+            type: String,
+            required: true
+        },
+        size: {
+            type: [String, Number],
+            default: 24
+        },
+        color: { 
+            type: String,
+            default: 'primary'
+        }
     },
 
     computed: {
@@ -37,5 +46,3 @@ export default {
     }
 };
 </script>
-
-<style scoped></style>
