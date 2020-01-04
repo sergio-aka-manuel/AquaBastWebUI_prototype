@@ -98,7 +98,7 @@ export default {
             tabs: [
                 { name: 'sensors', icon: 'sensor' },
                 { name: 'drives', icon: 'valve-error' },
-                { name: 'all', icon: 'subdevices' }
+                { name: 'all', icon: 'devices-light' }
             ]
         };
     }

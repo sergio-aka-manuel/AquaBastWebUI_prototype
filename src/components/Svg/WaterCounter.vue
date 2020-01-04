@@ -3,17 +3,18 @@
     <svg viewBox="0 0 140 40">
         <!-- round rect -->
         <rect
-            x="0.5"
-            y="0.5"
-            rx="3.5"
-            width="139"
-            height="39"
+            x="1"
+            y="1"
+            rx="3"
+            width="138"
+            height="38"
             fill="none"
+            stroke-width="2"
             :stroke="borderColor"
         />
 
         <!-- comma -->
-        <path d="M100 34.5H97V38.5H98L100 34.5Z" :fill="borderColor" />
+        <path d="M100 33H97V37H98L100 33Z" :fill="borderColor" />
 
         <!-- digits -->
         <g
@@ -81,7 +82,7 @@ export default {
         },
         borderColor: {
             type: [String, Number],
-            default: '#F2F2F2'
+            default: '#E2E2E2'
         },
         integerColor: {
             type: [String, Number],

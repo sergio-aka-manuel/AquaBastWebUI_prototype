@@ -1,9 +1,27 @@
 <template>
     <svg viewBox="0 0 24 24" :width="size" :height="size">
-        <g filter="url(#filter)" :fill="calculated_color">
+        <g filter="url(#filter0_d)" :fill="calculated_color">
             <path fill-rule="evenodd" clip-rule="evenodd" :d="path" />
         </g>
-        <defs v-html="filter"></defs>
+        <defs>
+            <filter
+                id="filter0_d"
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+            >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                    in="SourceAlpha"
+                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feOffset dx=".333" dy=".333" />
+                <feGaussianBlur stdDeviation="0.333" />
+                <feColorMatrix
+                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feBlend in="SourceGraphic" result="shape" />
+            </filter>
+        </defs>
     </svg>
 </template>
 
@@ -21,7 +39,7 @@ export default {
             type: [String, Number],
             default: 24
         },
-        color: { 
+        color: {
             type: String,
             default: 'primary'
         }

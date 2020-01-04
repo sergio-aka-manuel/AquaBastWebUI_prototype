@@ -3,9 +3,7 @@
         <navigation :title="device.name" />
 
         <div class="dashboard">
-            <div
-                class="infobox absolute-container d-flex justify-space-around align-center"
-            >
+            <div class="infobox absolute-container ">
                 <!-- <v-card width="90%" height="90%">
                     <v-card-title
                         class="text-truncate font-weight-regular pt-1"
@@ -19,15 +17,25 @@
             </div>
 
             <div class="buttons absolute-container">
-                <div class="dashboard-button button-top-left">tl</div>
-                <div class="dashboard-button button-top-right">tr</div>
-                <div class="dashboard-button button-bottom-left">bl</div>
-                <div class="dashboard-button button-bottom-right">br</div>
+                <div class="dashboard-button button-top-left">
+                    <svg-button name="tank-half" state="disabled" />
+                </div>
+                <div class="dashboard-button button-top-right">
+                    <svg-button name="refresh" state="disabled" />
+                </div>
+                <div class="dashboard-button button-bottom-left">
+                    <svg-button name="LOGO" state="normal" />
+                </div>
+                <div class="dashboard-button button-bottom-right">
+                    <svg-button name="valve-opened" state="normal" />
+                </div>
             </div>
+
             <div class="indicator absolute-container">
+                <!-- PEPSI -->
                 <svg-indicator v-bind:device="device" />
+                <!-- hot water counter -->
                 <div class="water-counter hot-water">
-                    <!-- <div id="HotWaterCounter"></div> -->
                     <svg-water-counter
                         v-if="device.config.hotWaterCounterEnabled"
                         :value="hotWaterCounterValue"
@@ -35,8 +43,8 @@
                         fractionalColor="red"
                     />
                 </div>
+                <!-- cold water counter -->
                 <div class="water-counter cold-water">
-                    <!-- <div id="ColdWaterCounter"></div> -->
                     <svg-water-counter
                         v-if="device.config.coldWaterCounterEnabled"
                         :value="coldWaterCounterValue"
@@ -45,26 +53,19 @@
                     />
                 </div>
             </div>
+
             <div class="footer absolute-container ">
+                <!-- buttons -->
                 <div class="d-flex justify-space-around align-stretch">
                     <template v-for="(item, i) in menuItems">
                         <v-btn class="mt-1" :to="item.path" :key="i" text link>
                             <svg-icon
                                 :name="item.icon"
-                                size="40px"
+                                size="48px"
                                 color="primary"
                             />
                         </v-btn>
                     </template>
-
-                    <!-- <v-btn> </v-btn>
-                    <v-btn text>
-                        <aqua-bast-icon
-                            name="LOGO"
-                            color="secondary"
-                            size="36px"
-                        ></aqua-bast-icon>
-                    </v-btn> -->
                 </div>
             </div>
         </div>
@@ -74,6 +75,7 @@
 <script>
 import Navigation from '@/components/NavReturn.vue';
 import SvgIcon from '@/components/Svg/Icon.vue';
+import SvgButton from '@/components/Svg/Button.vue';
 import SvgIndicator from '@/components/Svg/Indicator.vue';
 import SvgWaterCounter from '@/components/Svg/WaterCounter.vue';
 
@@ -81,6 +83,7 @@ export default {
     components: {
         Navigation,
         SvgIcon,
+        SvgButton,
         SvgIndicator,
         SvgWaterCounter
     },
@@ -109,7 +112,7 @@ export default {
             return [
                 {
                     title: 'Устройства',
-                    icon: 'devices',
+                    icon: 'devices-black',
                     path: '/subdev/' + this.device.uid
                 },
                 {
@@ -161,18 +164,23 @@ export default {
     position: absolute;
     background: transparent;
 
-    width: 20vmin;
-    height: 20vmin;
+    width: 24vmin;
+    height: 24vmin;
 }
+
+.dashboard-button:active {
+    background: green;
+}
+
 
 .water-counter {
     position: absolute;
     /*background: green;*/
 
-    -webkit-transition: all 0.3s ease;
+    /* -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; */
 
     width: 48vmin;
     line-height: normal;
@@ -232,27 +240,27 @@ export default {
     }
 
     .button-top-left {
-        top: calc(15% - 10vmin);
-        left: calc(15% - 10vmin);
-        background: chartreuse;
+        top: calc(15% - 12vmin);
+        left: calc(15% - 12vmin);
+        /* background: chartreuse; */
     }
 
     .button-top-right {
-        top: calc(15% - 10vmin);
-        left: calc(85% - 10vmin);
-        background: chartreuse;
+        top: calc(15% - 12vmin);
+        left: calc(85% - 12vmin);
+        /* background: chartreuse; */
     }
 
     .button-bottom-left {
-        top: calc(85% - 10vmin);
-        left: calc(15% - 10vmin);
-        background: chartreuse;
+        top: calc(85% - 12vmin);
+        left: calc(15% - 12vmin);
+        /* background: chartreuse; */
     }
 
     .button-bottom-right {
-        top: calc(85% - 10vmin);
-        left: calc(85% - 10vmin);
-        background: chartreuse;
+        top: calc(85% - 12vmin);
+        left: calc(85% - 12vmin);
+        /* background: chartreuse; */
     }
 }
 
@@ -293,25 +301,25 @@ export default {
     .button-top-left {
         top: calc(25% - 10vmin);
         left: calc(50% - 30vmin);
-        background: chartreuse;
+        /* background: chartreuse; */
     }
 
     .button-top-right {
         top: calc(25% - 10vmin);
         left: calc(50% + 10vmin);
-        background: chartreuse;
+        /* background: chartreuse; */
     }
 
     .button-bottom-left {
-        top: calc(75% - 10vmin);
+        top: calc(75% - 12vmin);
         left: calc(50% - 30vmin);
-        background: chartreuse;
+        /* background: chartreuse; */
     }
 
     .button-bottom-right {
-        top: calc(75% - 10vmin);
+        top: calc(75% - 12vmin);
         left: calc(50% + 10vmin);
-        background: chartreuse;
+        /* background: chartreuse; */
     }
 }
 </style>
