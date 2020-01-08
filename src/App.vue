@@ -3,10 +3,12 @@
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
+        <!-- <router-view></router-view> -->
     </v-app>
 </template>
 
 <script>
+//
 // import store from './store';
 
 const axios = require('axios').default;
@@ -15,35 +17,29 @@ export default {
     name: 'App',
 
     beforeCreate() {
+        //TODO: check code revision && reload, if necessary
+
         let _last = 0;
-        let _now = Math.floor(Date.now() / 1000);
+        const _now = Math.floor(Date.now() / 1000);
 
         if (localStorage.lastCodeUpdate) {
             _last = localStorage.getItem('lastCodeUpdate');
         }
 
         if (_now - _last > 60) {
-            localStorage.setItem('lastCodeUpdate', _now);
+            window.console.log('beforeCreate: reload.');
+
             window.location.reload();
+            localStorage.setItem('lastCodeUpdate', _now);
         }
     },
 
     mounted() {
-        window.console.log('on beforeCreate: ');
+        window.console.log('mounted: ');
         window.console.log('hostname: ' + window.location.hostname);
         window.console.log('pathname: ' + window.location.pathname);
         window.console.log('origin: ' + window.location.origin);
 
-        // this.$http
-        //     .get('http://test-cloud.bast.ru:10495/cloud/user/devices')
-        //     .then(
-        //         responce => {
-        //             window.console.log('success: ' + responce);
-        //         },
-        //         responce => {
-        //             window.console.log('failure: ' + responce);
-        //         }
-        //     );
         axios
             // .get('https://api.coindesk.com/v1/bpi/currentprice.json')
             .get('http://sa100.hopto.org/api/kv/aaa')
@@ -104,28 +100,14 @@ export default {
         }
     },
 
-    computed: {
-        appNavigationEnabled() {
-            // window.console.log(this.$route);
-            return false;
-        },
+    computed: {},
 
-        bottomHemicircleColor() {
-            return this.AquaBastBlueColor;
-        },
-        strokeColorThemed() {
-            let color = this.$vuetify.theme.dark ? 'lightgray' : 'gray';
-            return color;
-        }
-    },
-
-    components: {},
-
-    // data: () => ({ mqtt: {} })
     data() {
         return {
-            info: null,
-            mqtt: {}
+            /* MQTT Client */
+            mqtt: {},
+
+            info: null
         };
     }
 };

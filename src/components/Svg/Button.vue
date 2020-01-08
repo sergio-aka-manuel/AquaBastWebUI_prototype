@@ -6,12 +6,19 @@
                 cx="21"
                 cy="21"
                 r="18"
-                :fill="state == 'disabled' ? '#C4C4C4' : 'none'"
-                :stroke="borderColor"
                 stroke-width="2"
+                fill-opacity="0"
+                :stroke="borderColor"
+                :fill="state == 'disabled' ? '#C4C4C4' : 'white'"
+                @click.stop="$emit('button-click')"
             />
+
             <!-- icon -->
-            <g transform="translate(9,9)" :fill="iconColor">
+            <g
+                transform="translate(9,9)"
+                :fill="iconColor"
+                @click.stop="$emit('button-click')"
+            >
                 <path fill-rule="evenodd" clip-rule="evenodd" :d="path" />
             </g>
         </g>
@@ -85,7 +92,7 @@ export default {
 
         iconColor() {
             var color = this.palette['secondary'];
-            if (this.state != 'disabled' ) color = this.palette['primary'];
+            if (this.state != 'disabled') color = this.palette['primary'];
             return color;
         },
 

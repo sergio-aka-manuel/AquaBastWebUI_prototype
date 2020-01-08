@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <div>
         <navigation :title="device.name" />
 
         <div class="dashboard">
@@ -14,21 +14,6 @@
                         _device.description
                     }}</v-card-subtitle>
                 </v-card> -->
-            </div>
-
-            <div class="buttons absolute-container">
-                <div class="dashboard-button button-top-left">
-                    <svg-button name="tank-half" state="disabled" />
-                </div>
-                <div class="dashboard-button button-top-right">
-                    <svg-button name="refresh" state="disabled" />
-                </div>
-                <div class="dashboard-button button-bottom-left">
-                    <svg-button name="LOGO" state="normal" />
-                </div>
-                <div class="dashboard-button button-bottom-right">
-                    <svg-button name="valve-opened" state="normal" />
-                </div>
             </div>
 
             <div class="indicator absolute-container">
@@ -54,6 +39,37 @@
                 </div>
             </div>
 
+            <div class="dashboard-buttons absolute-container">
+                <div class="dashboard-button" :class="btnTopLeftClass">
+                    <svg-button
+                        name="tank-half"
+                        :state="buttons.topLeft.state"
+                        v-on:button-click="onClick('topLeft')"
+                    />
+                </div>
+                <div class="dashboard-button" :class="btnTopRightClass">
+                    <svg-button
+                        name="refresh"
+                        :state="buttons.topRight.state"
+                        v-on:button-click="onClick('topRight')"
+                    />
+                </div>
+                <div class="dashboard-button" :class="btnBottomLeftClass">
+                    <svg-button
+                        name="LOGO"
+                        :state="buttons.bottomLeft.state"
+                        v-on:button-click="onClick('bottomLeft')"
+                    />
+                </div>
+                <div class="dashboard-button" :class="btnBottomRightClass">
+                    <svg-button
+                        name="valve-opened"
+                        :state="buttons.bottomRight.state"
+                        v-on:button-click="onClick('bottomRight')"
+                    />
+                </div>
+            </div>
+
             <div class="footer absolute-container ">
                 <!-- buttons -->
                 <div class="d-flex justify-space-around align-stretch">
@@ -69,11 +85,13 @@
                 </div>
             </div>
         </div>
-    </span>
+    </div>
 </template>
 
 <script>
-import Navigation from '@/components/NavReturn.vue';
+import Navigation from '@/components/Navigation/ApplicationBar.vue';
+// import Navigation from '@/components/NavReturn.vue';
+
 import SvgIcon from '@/components/Svg/Icon.vue';
 import SvgButton from '@/components/Svg/Button.vue';
 import SvgIndicator from '@/components/Svg/Indicator.vue';
@@ -95,7 +113,18 @@ export default {
         }, 1100);
     },
 
-    methods: {},
+    methods: {
+        onClick(value) {
+            window.console.log('Clicked: ', value);
+
+            if (this.buttons[value].state != 'disabled') {
+                this.buttons[value].pressed = true;
+                setTimeout(() => {
+                    this.buttons[value].pressed = false;
+                }, 300);
+            }
+        }
+    },
 
     computed: {
         device() {
@@ -106,6 +135,54 @@ export default {
 
             // window.console.log(d);
             return dev[0];
+        },
+
+        btnTopLeftClass() {
+            const size = this.buttons.topLeft.pressed
+                ? 'dashboard-button-size-pressed'
+                : 'dashboard-button-size';
+
+            const pos = this.buttons.topLeft.pressed
+                ? 'dashboard-button-top-left-pressed'
+                : 'dashboard-button-top-left';
+
+            return size + ' ' + pos;
+        },
+
+        btnTopRightClass() {
+            const size = this.buttons.topRight.pressed
+                ? 'dashboard-button-size-pressed'
+                : 'dashboard-button-size';
+
+            const pos = this.buttons.topRight.pressed
+                ? 'dashboard-button-top-right-pressed'
+                : 'dashboard-button-top-right';
+
+            return size + ' ' + pos;
+        },
+
+        btnBottomLeftClass() {
+            const size = this.buttons.bottomLeft.pressed
+                ? 'dashboard-button-size-pressed'
+                : 'dashboard-button-size';
+
+            const pos = this.buttons.bottomLeft.pressed
+                ? 'dashboard-button-bottom-left-pressed'
+                : 'dashboard-button-bottom-left';
+
+            return size + ' ' + pos;
+        },
+
+        btnBottomRightClass() {
+            const size = this.buttons.bottomRight.pressed
+                ? 'dashboard-button-size-pressed'
+                : 'dashboard-button-size';
+
+            const pos = this.buttons.bottomRight.pressed
+                ? 'dashboard-button-bottom-right-pressed'
+                : 'dashboard-button-bottom-right';
+
+            return size + ' ' + pos;
         },
 
         menuItems() {
@@ -138,7 +215,26 @@ export default {
         return {
             activeBtn: -1,
             hotWaterCounterValue: 0,
-            coldWaterCounterValue: 0
+            coldWaterCounterValue: 0,
+
+            buttons: {
+                topLeft: {
+                    pressed: false,
+                    state: 'disabled'
+                },
+                topRight: {
+                    pressed: false,
+                    state: 'disabled'
+                },
+                bottomLeft: {
+                    pressed: false,
+                    state: 'normal'
+                },
+                bottomRight: {
+                    pressed: false,
+                    state: 'normal'
+                }
+            }
         };
     }
 };
@@ -156,22 +252,26 @@ export default {
 .dashboard {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
     /* background: yellow; */
 }
 
 .dashboard-button {
-    position: absolute;
+    transition: all 0.3s;
     background: transparent;
+    position: absolute;
+}
 
+.dashboard-button-size {
     width: 24vmin;
     height: 24vmin;
 }
 
-.dashboard-button:active {
-    background: green;
+.dashboard-button-size-pressed {
+    position: absolute;
+    width: 30vmin;
+    height: 30vmin;
 }
-
 
 .water-counter {
     position: absolute;
@@ -231,7 +331,7 @@ export default {
         /* background: blue; */
     }
 
-    .buttons {
+    .dashboard-buttons {
         top: 20%;
         left: 0;
         width: 100%;
@@ -239,27 +339,47 @@ export default {
         /* background: red; */
     }
 
-    .button-top-left {
+    .dashboard-button-top-left {
         top: calc(15% - 12vmin);
         left: calc(15% - 12vmin);
         /* background: chartreuse; */
     }
+    .dashboard-button-top-left-pressed {
+        top: calc(15% - 15vmin);
+        left: calc(15% - 15vmin);
+        /* background: chartreuse; */
+    }
 
-    .button-top-right {
+    .dashboard-button-top-right {
         top: calc(15% - 12vmin);
         left: calc(85% - 12vmin);
         /* background: chartreuse; */
     }
+   .dashboard-button-top-right-pressed {
+        top: calc(15% - 15vmin);
+        left: calc(85% - 15vmin);
+        /* background: chartreuse; */
+    }
 
-    .button-bottom-left {
+    .dashboard-button-bottom-left {
         top: calc(85% - 12vmin);
         left: calc(15% - 12vmin);
         /* background: chartreuse; */
     }
+    .dashboard-button-bottom-left-pressed {
+        top: calc(85% - 15vmin);
+        left: calc(15% - 15vmin);
+        /* background: chartreuse; */
+    }
 
-    .button-bottom-right {
+    .dashboard-button-bottom-right {
         top: calc(85% - 12vmin);
         left: calc(85% - 12vmin);
+        /* background: chartreuse; */
+    }
+    .dashboard-button-bottom-right-pressed {
+        top: calc(85% - 15vmin);
+        left: calc(85% - 15vmin);
         /* background: chartreuse; */
     }
 }
@@ -290,7 +410,7 @@ export default {
         /* background: blue; */
     }
 
-    .buttons {
+    .dashboard-buttons {
         top: 20%;
         left: 50%;
         width: 50%;
@@ -298,27 +418,47 @@ export default {
         /* background: red; */
     }
 
-    .button-top-left {
-        top: calc(25% - 10vmin);
+    .dashboard-button-top-left {
+        top: calc(25% - 12vmin);
         left: calc(50% - 30vmin);
         /* background: chartreuse; */
     }
-
-    .button-top-right {
-        top: calc(25% - 10vmin);
-        left: calc(50% + 10vmin);
+     .dashboard-button-top-left-pressed {
+        top: calc(25% - 14vmin);
+        left: calc(50% - 32vmin);
         /* background: chartreuse; */
     }
 
-    .button-bottom-left {
+    .dashboard-button-top-right {
+        top: calc(25% - 12vmin);
+        left: calc(50% + 10vmin);
+        /* background: chartreuse; */
+    }
+    .dashboard-button-top-right-pressed {
+        top: calc(25% - 14vmin);
+        left: calc(50% + 8vmin);
+        /* background: chartreuse; */
+    }
+
+    .dashboard-button-bottom-left {
         top: calc(75% - 12vmin);
         left: calc(50% - 30vmin);
         /* background: chartreuse; */
     }
+     .dashboard-button-bottom-left-pressed {
+        top: calc(75% - 14vmin);
+        left: calc(50% - 32vmin);
+        /* background: chartreuse; */
+    }
 
-    .button-bottom-right {
+    .dashboard-button-bottom-right {
         top: calc(75% - 12vmin);
         left: calc(50% + 10vmin);
+        /* background: chartreuse; */
+    }
+     .dashboard-button-bottom-right-pressed {
+        top: calc(75% - 14vmin);
+        left: calc(50% + 8vmin);
         /* background: chartreuse; */
     }
 }

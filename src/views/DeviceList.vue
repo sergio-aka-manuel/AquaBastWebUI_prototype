@@ -1,7 +1,8 @@
 <template>
     <span>
-        <app-navigation />
+        <navigation title="AquaBast" :menu="menuItems" />
 
+        <!-- TODO: replace with list container  -->
         <device-card
             v-for="device in devices"
             :key="device.uid"
@@ -26,15 +27,14 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import AppNavigation from '@/components/NavSandwich.vue';
+import Navigation from '@/components/Navigation/ApplicationBar.vue';
 import DeviceCard from '@/components/DeviceCard.vue';
 
 export default {
     name: 'DeviceList',
 
     components: {
-        AppNavigation,
+        Navigation,
         DeviceCard
     },
 
@@ -54,7 +54,27 @@ export default {
     },
 
     data() {
-        return {};
+        return {
+            menuItems: [
+                // { heading: 'menu' },
+                {
+                    title: 'Журнал событий',
+                    path: '/journal/all',
+                    icon: 'journal'
+                },
+                {
+                    title: 'Настройки',
+                    path: '/settings/application',
+                    icon: 'settings'
+                },
+                { divider: true },
+                {
+                    title: 'О программе',
+                    path: '/about/application',
+                    icon: 'INFO'
+                }
+            ]
+        };
     }
 };
 </script>

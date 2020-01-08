@@ -1,7 +1,7 @@
 <template>
     <span>
         <navigation
-            v-on:tab-changed="filter = $event"
+            v-on:tab-selected="filter = $event"
             :title="device.name"
             :tabs="tabs"
         />
@@ -16,7 +16,7 @@
 
 <script>
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
-import Navigation from '@/components/NavReturn.vue';
+import Navigation from '@/components/Navigation/ApplicationBar.vue';
 import SubdeviceCard from '@/components/SubdeviceCard.vue';
 import { isUndefined } from 'util';
 
@@ -96,9 +96,9 @@ export default {
 
             filter: null,
             tabs: [
-                { name: 'sensors', icon: 'sensor' },
                 { name: 'drives', icon: 'valve-error' },
-                { name: 'all', icon: 'devices-light' }
+                { name: 'all', icon: 'devices-light' },
+                { name: 'sensors', icon: 'sensor' },
             ]
         };
     }

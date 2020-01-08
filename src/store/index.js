@@ -165,9 +165,9 @@ export default new Vuex.Store({
         credentials: {
             loggedIn: false,
             apiToken: '',
-            username: 'Sergio',
+            name: 'Sergio',
+            mail: 'sergio.rudenko@gmail.com',
             phone: '79185387721',
-            mail: 'sergio.rudenko@gmail.com'
         },
         devices: [
             {

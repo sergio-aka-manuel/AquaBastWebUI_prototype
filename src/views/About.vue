@@ -3,7 +3,13 @@
         <navigation :title="'UID: ' + $route.params.uid" />
 
         <v-layout>
-            <h2 class="ma-auto pa-4">About page</h2>
+            <h2 v-if="$route.path == '/about/application'" class="ma-auto pa-4">
+                About page
+            </h2>
+
+            <h2 v-else class="ma-auto pa-4">
+                Help page
+            </h2>
         </v-layout>
 
         <v-layout justify-center>
@@ -18,7 +24,7 @@
 <style scoped></style>
 
 <script>
-import Navigation from '@/components/NavReturn.vue';
+import Navigation from '@/components/Navigation/ApplicationBar.vue';
 
 export default {
     components: {

@@ -18,7 +18,7 @@
 <style scoped></style>
 
 <script>
-import Navigation from '@/components/NavReturn.vue';
+import Navigation from '@/components/Navigation/ApplicationBar.vue';
 
 export default {
     components: {
