@@ -1,10 +1,10 @@
 <template>
-    <svg viewBox="0 0 40 40" fill="none">
+    <svg viewBox="0 0 42 42" fill="none">
         <g filter="url(#filter1_d)">
             <!-- border -->
             <circle
-                cx="20"
-                cy="20"
+                cx="21"
+                cy="21"
                 r="15"
                 stroke-width="2"
                 fill-opacity="0"
@@ -15,9 +15,8 @@
             />
 
             <!-- icon -->
-            <!-- @click.stop="$emit('button-click')" -->
             <g
-                transform="translate(8,8)"
+                transform="translate(9,9)"
                 :fill="iconColor"
                 @click.stop="onClick()"
             >
@@ -95,7 +94,7 @@ import svgData from './data/iconGlyphs.json';
 
 export default {
     props: {
-        name: {
+        icon: {
             type: String,
             required: true
         },
@@ -124,7 +123,7 @@ export default {
 
     computed: {
         path() {
-            return svgData[this.name];
+            return svgData[this.icon];
         },
 
         filter() {

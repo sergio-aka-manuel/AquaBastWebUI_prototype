@@ -42,7 +42,7 @@
             <div class="dashboard-buttons absolute-container">
                 <div class="dashboard-button dashboard-button-top-left">
                     <svg-button
-                        name="tank-half"
+                        :icon="buttons.topLeft.icon"
                         :state="buttons.topLeft.state"
                         v-on:button-click="onClick('topLeft')"
                     />
@@ -77,7 +77,7 @@
                         <v-btn class="mt-1" :to="item.path" :key="i" text link>
                             <svg-icon
                                 :name="item.icon"
-                                size="48px"
+                                size="36px"
                                 color="primary"
                             />
                         </v-btn>
@@ -166,6 +166,7 @@ export default {
 
             buttons: {
                 topLeft: {
+                    icon: 'tank-half',
                     state: 'disabled'
                 },
                 topRight: {

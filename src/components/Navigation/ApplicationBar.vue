@@ -116,6 +116,9 @@
                         />
                     </div>
                 </v-list-item>
+                <v-btn @click.stop="$router.go(-1)" icon>
+                    <v-icon>mdi-arrow-left</v-icon>
+                </v-btn>
             </template>
         </v-navigation-drawer>
     </span>

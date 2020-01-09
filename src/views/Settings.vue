@@ -12,6 +12,13 @@
                 src="../assets/animated-gifs-under-construction.gif"
             />
         </v-layout>
+
+        <div class="pa-2">
+            <v-btn @click.stop="onClick()" block rounded text>REFRESH</v-btn>
+        </div>
+        <v-layout justify-center>
+            <p>Reloaded: {{ reloaded }}</p>
+        </v-layout>
     </span>
 </template>
 
@@ -29,6 +36,24 @@ export default {
         counter() {
             return this.$store.state.count;
         }
+    },
+
+    mounted() {
+        this.reloaded = localStorage.getItem('lastCodeUpdate');
+    },
+
+    methods: {
+        onClick() {
+            localStorage.setItem('lastCodeUpdate', this.reloaded);
+            this.reloaded = Math.floor(Date.now() / 1000);
+            window.location.reload();
+        }
+    },
+
+    data() {
+        return {
+            reloaded: ''
+        };
     }
 };
 </script>
