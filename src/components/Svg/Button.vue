@@ -1,23 +1,25 @@
 <template>
-    <svg viewBox="0 0 42 42" fill="none">
+    <svg viewBox="0 0 40 40" fill="none">
         <g filter="url(#filter1_d)">
             <!-- border -->
             <circle
-                cx="21"
-                cy="21"
-                r="18"
+                cx="20"
+                cy="20"
+                r="15"
                 stroke-width="2"
                 fill-opacity="0"
                 :stroke="borderColor"
                 :fill="state == 'disabled' ? '#C4C4C4' : 'white'"
-                @click.stop="$emit('button-click')"
+                :class="animated"
+                @click.stop="onClick()"
             />
 
             <!-- icon -->
+            <!-- @click.stop="$emit('button-click')" -->
             <g
-                transform="translate(9,9)"
+                transform="translate(8,8)"
                 :fill="iconColor"
-                @click.stop="$emit('button-click')"
+                @click.stop="onClick()"
             >
                 <path fill-rule="evenodd" clip-rule="evenodd" :d="path" />
             </g>
@@ -56,6 +58,38 @@
     </svg>
 </template>
 
+<style scoped>
+@keyframes radius {
+    /* from {
+        r: 15;
+    }
+    to {
+        r: 18;
+    } */
+
+    0% {
+        r: 15;
+    }
+
+    15% {
+        r: 18;
+        stroke: orange;
+    }
+
+    80% {
+        r: 14;
+    }
+
+    100% {
+        r: 15;
+    }
+}
+
+.animated {
+    animation: radius 0.5s;
+}
+</style>
+
 <script>
 import svgData from './data/iconGlyphs.json';
 
@@ -72,6 +106,19 @@ export default {
         state: {
             type: String,
             default: 'normal'
+        }
+    },
+
+    methods: {
+        onClick() {
+            if (this.state != 'disabled') {
+                this.$emit('button-click');
+                this.animated = 'animated';
+
+                setTimeout(() => {
+                    this.animated = '';
+                }, 500);
+            }
         }
     },
 
@@ -102,6 +149,12 @@ export default {
             if (this.state == 'normal') color = this.palette['primary'];
             return color;
         }
+    },
+
+    data() {
+        return {
+            animated: ''
+        };
     }
 };
 </script>
