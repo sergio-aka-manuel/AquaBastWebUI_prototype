@@ -10,6 +10,17 @@ export default new Vuex.Store({
         count: 0,
 
         const: {
+            webui: {
+                host: 'https://sa100cloud.com',
+                versionUrl: '/app/kv/aquabast/version',
+            },
+
+            version: {
+                major: 0,
+                minor: 1,
+                date: ''
+            },
+
             AquaBastRedColor: 'rgb(219, 43, 57)', //#DB2B39
             AquaBastBlueColor: 'rgb(1, 72, 138)', //#01488A
             AquaBastGrayColor: 'rgb(86, 86, 86)', //#565656
@@ -137,7 +148,7 @@ export default new Vuex.Store({
                 }
             },
 
-            deviceSortOreder: {
+            deviceSortOrder: {
                 // Протечка
                 wired_sensor_leakage: 0,
                 wireless_sensor_leakage: 0,
@@ -159,8 +170,18 @@ export default new Vuex.Store({
                 wireless_sensor_disabled: 5,
                 valve_disabled: 6,
                 relay_disabled: 7
+            },
+
+            cloudStatusIcon: {
+                mqtt: 'cloud',
+                init: 'cloud-offline',
+                device: 'cloud-online'
             }
         },
+
+        //
+        startAs: null,          // [ dev | app | page | local ]
+        cloudStatus: 'init',    // [ init | mqtt | device ]
 
         credentials: {
             loggedIn: false,
@@ -168,6 +189,12 @@ export default new Vuex.Store({
             name: 'Sergio',
             mail: 'sergio.rudenko@gmail.com',
             phone: '79185387721',
+
+            mqtt: {
+                host: 'test-cloud.bast.ru',
+                port: 3883,
+                path: '/mqtt'
+            }
         },
         devices: [
             {
@@ -303,6 +330,16 @@ export default new Vuex.Store({
             state.count++;
         },
 
+        setStartAs(state, data) {
+            window.console.log('setStartAs:', data);
+            state.startAs = data;
+        },
+
+        setCloudStatus(state, data) {
+            window.console.log('cloudStatus:', data);
+            state.cloudStatus = data;
+        },
+
         updateDeviceText(state, data) {
             window.console.log('updateDeviceText');
             window.console.log('host = ' + data.deviceUid);
@@ -313,13 +350,13 @@ export default new Vuex.Store({
             const host_uid = data.deviceUid;
             const component_uid = data.componentUid;
 
-            var host_device = state.devices.filter(function(h) {
+            var host_device = state.devices.filter(function (h) {
                 return h.uid == host_uid;
             })[0];
 
             window.console.log(host_device);
 
-            var component_device = host_device.components.filter(function(c) {
+            var component_device = host_device.components.filter(function (c) {
                 return c.uid == component_uid;
             })[0];
 

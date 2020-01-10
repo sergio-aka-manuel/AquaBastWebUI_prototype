@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navigation :title="device.name" />
+        <!-- <navigation :title="device.name" /> -->
 
         <div class="dashboard">
             <div class="infobox absolute-container ">
@@ -49,21 +49,21 @@
                 </div>
                 <div class="dashboard-button dashboard-button-top-right">
                     <svg-button
-                        name="refresh"
+                        :icon="buttons.topRight.icon"
                         :state="buttons.topRight.state"
                         v-on:button-click="onClick('topRight')"
                     />
                 </div>
                 <div class="dashboard-button dashboard-button-bottom-left">
                     <svg-button
-                        name="LOGO"
+                        :icon="buttons.bottomLeft.icon"
                         :state="buttons.bottomLeft.state"
                         v-on:button-click="onClick('bottomLeft')"
                     />
                 </div>
                 <div class="dashboard-button dashboard-button-bottom-right">
                     <svg-button
-                        name="valve-opened"
+                        :icon="buttons.bottomRight.icon"
                         :state="buttons.bottomRight.state"
                         v-on:button-click="onClick('bottomRight')"
                     />
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import Navigation from '@/components/Navigation/ApplicationBar.vue';
+// import Navigation from '@/components/Navigation/ApplicationBar.vue';
 // import Navigation from '@/components/NavReturn.vue';
 
 import SvgIcon from '@/components/Svg/Icon.vue';
@@ -99,7 +99,7 @@ import SvgWaterCounter from '@/components/Svg/WaterCounter.vue';
 
 export default {
     components: {
-        Navigation,
+        // Navigation,
         SvgIcon,
         SvgButton,
         SvgIndicator,
@@ -170,12 +170,15 @@ export default {
                     state: 'disabled'
                 },
                 topRight: {
+                    icon: 'refresh',
                     state: 'disabled'
                 },
                 bottomLeft: {
+                    icon: 'LOGO',
                     state: 'normal'
                 },
                 bottomRight: {
+                    icon: 'valve-closed',
                     state: 'normal'
                 }
             }

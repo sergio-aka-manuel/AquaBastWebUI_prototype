@@ -1,6 +1,6 @@
 <template>
     <span>
-        <navigation :title="'UID: ' + $route.params.uid" />
+        <!-- <navigation :title="'UID: ' + $route.params.uid" /> -->
 
         <v-layout>
             <h2 class="ma-auto pa-4">Settings page</h2>
@@ -25,11 +25,11 @@
 <style scoped></style>
 
 <script>
-import Navigation from '@/components/Navigation/ApplicationBar.vue';
+// import Navigation from '@/components/Navigation/ApplicationBar.vue';
 
 export default {
     components: {
-        Navigation
+        // Navigation
     },
 
     computed: {
@@ -44,8 +44,9 @@ export default {
 
     methods: {
         onClick() {
-            localStorage.setItem('lastCodeUpdate', this.reloaded);
             this.reloaded = Math.floor(Date.now() / 1000);
+            localStorage.setItem('lastCodeUpdate', this.reloaded);
+
             window.location.reload();
         }
     },

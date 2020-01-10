@@ -14,33 +14,15 @@
             <v-toolbar-title>{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
 
-            <!-- mqtt indicator -->
-            <svg-icon name="cloud" size="36px" color="white" />
+            <!-- cloud indicator -->
+            <svg-icon :name="cloudIcon" size="36px" color="white" />
 
             <!-- help button -->
             <v-btn icon class="ml-2" @click.stop="$emit('help-button-click')">
                 <svg-icon name="INFO" size="40px" color="white" />
             </v-btn>
 
-            <template v-slot:extension v-if="tabs">
-                <v-tabs
-                    v-model="tab"
-                    @change="$emit('tab-selected', tab)"
-                    background-color="aquabast_blue"
-                    grow
-                    value="1"
-                >
-                    <v-tabs-slider color="warning"></v-tabs-slider>
-                    <v-tab
-                        v-for="(item, i) in tabs"
-                        :href="'#' + item.name"
-                        :key="i"
-                        class="priamary--text"
-                    >
-                        <svg-icon :name="item.icon" size="36px" color="white" />
-                    </v-tab>
-                </v-tabs>
-            </template>
+            <template v-slot:extension v-if="tabs"> </template>
         </v-app-bar>
 
         <v-navigation-drawer
@@ -116,9 +98,6 @@
                         />
                     </div>
                 </v-list-item>
-                <v-btn @click.stop="$router.go(-1)" icon>
-                    <v-icon>mdi-arrow-left</v-icon>
-                </v-btn>
             </template>
         </v-navigation-drawer>
     </span>
@@ -151,11 +130,24 @@ export default {
         }
     },
 
-    mounted() {
-        if (this.tabs) this.tab = this.tabs[1].name;
+    mounted() {},
+
+    watch: {
+        dark(value) {
+            localStorage.setItem('darkMode', value);
+        }
     },
 
     computed: {
+        dark() {
+            return this.$vuetify.theme.dark;
+        },
+
+        cloudIcon() {
+            const status = this.$store.state.cloudStatus;
+            return this.$store.state.const.cloudStatusIcon[status];
+        },
+
         // Credentials
         name() {
             const name = this.$store.state.credentials.name;

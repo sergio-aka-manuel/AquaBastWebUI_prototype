@@ -1,6 +1,6 @@
 <template>
     <span>
-        <navigation title="AquaBast" :menu="menuItems" />
+        <!-- <navigation title="AquaBast" :menu="menuItems" /> -->
 
         <!-- TODO: replace with list container  -->
         <device-card
@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import Navigation from '@/components/Navigation/ApplicationBar.vue';
+//
 import DeviceCard from '@/components/DeviceCard.vue';
 
 export default {
     name: 'DeviceList',
 
     components: {
-        Navigation,
+        // Navigation,
         DeviceCard
     },
 
@@ -54,27 +54,7 @@ export default {
     },
 
     data() {
-        return {
-            menuItems: [
-                // { heading: 'menu' },
-                {
-                    title: 'Журнал событий',
-                    path: '/journal/all',
-                    icon: 'journal'
-                },
-                {
-                    title: 'Настройки',
-                    path: '/settings/application',
-                    icon: 'settings'
-                },
-                { divider: true },
-                {
-                    title: 'О программе',
-                    path: '/about/application',
-                    icon: 'INFO'
-                }
-            ]
-        };
+        return {};
     }
 };
 </script>

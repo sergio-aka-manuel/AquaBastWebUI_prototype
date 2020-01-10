@@ -110,12 +110,13 @@ export default {
 
     methods: {
         onClick() {
-            if (this.state != 'disabled') {
+            if (this.state != 'disabled' && !this.pressed) {
                 this.$emit('button-click');
-                this.animated = 'animated';
+                this.pressed = true;
 
-                setTimeout(() => {
-                    this.animated = '';
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    this.pressed = false;
                 }, 500);
             }
         }
@@ -147,12 +148,17 @@ export default {
             if (this.state == 'error') color = this.palette['error'];
             if (this.state == 'normal') color = this.palette['primary'];
             return color;
+        },
+
+        animated() {
+            return this.pressed ? 'animated' : '';
         }
     },
 
     data() {
         return {
-            animated: ''
+            pressed: false,
+            timeout: null
         };
     }
 };

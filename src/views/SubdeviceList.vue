@@ -1,14 +1,18 @@
 <template>
     <span>
-        <navigation
-            v-on:tab-selected="filter = $event"
-            :title="device.name"
-            :tabs="tabs"
-        />
+        <!-- <navigation v-on:tab-selected="filter = $event" :title="device.name" /> -->
+
+        <v-tabs grow v-model="filter" app>
+            <v-tabs-slider color="warning"></v-tabs-slider>
+            <v-tab v-for="(item, i) in tabs" :key="i" :href="'#' + item.name">
+                <svg-icon :name="item.icon" size="36px" color="primary" />
+            </v-tab>
+        </v-tabs>
 
         <subdevice-card
             v-for="(item, i) in filteredSubdevices"
             :subdevice="item"
+            :href="'#' + item.name"
             :key="i"
         />
     </span>
@@ -16,14 +20,16 @@
 
 <script>
 //@click="expanded != getKey(component) ? expanded = getKey(component) : expanded = ''"
-import Navigation from '@/components/Navigation/ApplicationBar.vue';
+// import Navigation from '@/components/Navigation/ApplicationBar.vue';
 import SubdeviceCard from '@/components/SubdeviceCard.vue';
+import SvgIcon from '@/components/Svg/Icon.vue';
 import { isUndefined } from 'util';
 
 export default {
     components: {
-        Navigation,
-        SubdeviceCard
+        // Navigation,
+        SubdeviceCard,
+        SvgIcon
     },
 
     created() {
@@ -33,6 +39,10 @@ export default {
         });
 
         this.device = dev[0];
+
+        if (this.tabs[1]) {
+            this.filter = this.tabs[1].name;
+        }
     },
 
     methods: {},
@@ -49,10 +59,10 @@ export default {
 
                 return items.sort((a, b) => {
                     // Сортировка по типу устройства и состоянию
-                    var _a = this.$store.state.const.deviceSortOreder[
+                    var _a = this.$store.state.const.deviceSortOrder[
                         a.type + '_' + a.state
                     ];
-                    var _b = this.$store.state.const.deviceSortOreder[
+                    var _b = this.$store.state.const.deviceSortOrder[
                         b.type + '_' + b.state
                     ];
 
@@ -94,11 +104,11 @@ export default {
 
             expanded: '',
 
-            filter: null,
+            filter: 'all',
             tabs: [
                 { name: 'drives', icon: 'valve-error' },
                 { name: 'all', icon: 'devices-light' },
-                { name: 'sensors', icon: 'sensor' },
+                { name: 'sensors', icon: 'sensor' }
             ]
         };
     }

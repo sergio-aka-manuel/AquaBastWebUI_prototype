@@ -1,6 +1,6 @@
 <template>
     <span>
-        <navigation :title="'UID: ' + $route.params.uid" />
+        <!-- <navigation :title="'UID: ' + $route.params.uid" /> -->
 
         <v-layout>
             <h2 class="ma-auto pa-4">Charts page</h2>
@@ -18,11 +18,11 @@
 <style scoped></style>
 
 <script>
-import Navigation from '@/components/Navigation/ApplicationBar.vue';
+// import Navigation from '@/components/Navigation/ApplicationBar.vue';
 
 export default {
     components: {
-        Navigation
+        // Navigation
     },
 
     computed: {
